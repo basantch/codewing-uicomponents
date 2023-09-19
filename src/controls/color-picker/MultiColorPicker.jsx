@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import ControlGroup from "../../containers/ControlGroup";
-import ColorPickerTrigger from "./ColorPickerTrigger";
-import SingleColorPickerPopover from "./SingleColorPickerPopover";
+import SingleColorPicker from "./SingleColorPicker";
 
 const MultiColorPickerStyle = styled.div`
   display: flex;
@@ -14,14 +13,13 @@ const MultiColorPicker = ({ colors, value, onChange, ...ControlGroup }) => {
     <MultiColorPickerStyle>
       {colors?.map(({ title, name, colorPalette }) => {
         return (
-          <ColorPickerTrigger color={value[name]} title={title}>
-            <SingleColorPickerPopover
-              palette={colorPalette}
-              value={value[name]}
-              onChange={(_color) => onChange({ ...value, [name]: _color })}
-              {...ControlGroup}
-            />
-          </ColorPickerTrigger>
+          <SingleColorPicker
+            value={value[name]}
+            title={title}
+            colorPalette={colorPalette}
+            onChange={(_color) => onChange({ ...value, [name]: _color })}
+            {...ControlGroup}
+          />
         );
       })}
     </MultiColorPickerStyle>

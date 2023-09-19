@@ -1,14 +1,33 @@
+import styled from "@emotion/styled";
+import { ColorPalette, ColorPicker } from "@wordpress/components";
 import ControlGroup from "../../containers/ControlGroup";
 import ColorPickerTrigger from "./ColorPickerTrigger";
-import SingleColorPickerPopover from "./SingleColorPickerPopover";
+
+const ColorPickerHeader = styled.header`
+  padding: 5px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  margin: 0 -4px 13px;
+`;
 
 const SingleColorPicker = ({ colorPalette, value, title, ...ControlGroup }) => {
   return (
     <ColorPickerTrigger color={value} title={title}>
-      <SingleColorPickerPopover
-        palette={colorPalette}
-        value={value}
-        onChange={onchange}
+      {colorPalette && (
+        <ColorPickerHeader>
+          <ColorPalette
+            colors={colorPalette}
+            value={value}
+            clearable={false}
+            disableCustomColors
+            {...ControlGroup}
+          />
+        </ColorPickerHeader>
+      )}
+      <ColorPicker
+        color={value}
+        enableAlpha
+        defaultValue="#000"
         {...ControlGroup}
       />
     </ColorPickerTrigger>

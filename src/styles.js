@@ -155,6 +155,7 @@ const styles = css`
       }
       .components-circular-option-picker__option-wrapper {
         position: relative;
+        display: flex;
         svg {
           position: absolute;
           left: 0;

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import Tippy from "@tippyjs/react";
 
 const TooltipStyle = styled.div`
-  display: inline-block;
+  display: inline-flex;
   cursor: pointer;
   &:hover {
     color: var(--secondary-color);

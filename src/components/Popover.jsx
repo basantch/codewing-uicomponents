@@ -6,12 +6,15 @@ const PopoverStyle = styled.div`
     max-width: 286px;
     width: 286px;
     .tippy-arrow {
+      width: 14px;
+      height: 14px;
       &::before {
         border: 1px solid transparent;
         width: 12px;
         height: 12px;
         background-color: currentColor;
         transform: rotate(45deg);
+        transform-origin: center;
       }
     }
   }
@@ -20,7 +23,6 @@ const PopoverStyle = styled.div`
       &::before {
         border-bottom-color: var(--border-color);
         border-right-color: var(--border-color);
-        bottom: -9px;
       }
     }
   }
@@ -29,7 +31,6 @@ const PopoverStyle = styled.div`
       &::before {
         border-top-color: var(--border-color);
         border-left-color: var(--border-color);
-        top: -9px;
       }
     }
   }
@@ -38,7 +39,6 @@ const PopoverStyle = styled.div`
       &::before {
         border-top-color: var(--border-color);
         border-right-color: var(--border-color);
-        right: -9px;
       }
     }
   }
@@ -47,7 +47,6 @@ const PopoverStyle = styled.div`
       &::before {
         border-left-color: var(--border-color);
         border-bottom-color: var(--border-color);
-        left: -9px;
       }
     }
   }
@@ -55,7 +54,7 @@ const PopoverStyle = styled.div`
     background-color: #ffffff;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
-    padding: 8px;
+    padding: 12px;
     box-shadow:
       0px 4px 6px -2px #2b303408,
       0px 12px 16px -4px #2b303414;
@@ -68,23 +67,33 @@ const PopoverStyle = styled.div`
         color: #ffffff;
       }
     }
+    .cw__control-item {
+      margin-bottom: 8px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
   }
 `;
 
-export default ({ children, className, ...rest }) => {
+export default ({ content, children, className, ...rest }) => {
   const cls = `cw_popover ${className}`;
   return (
     <PopoverStyle>
       <Tippy
+        content={content}
         className={cls}
         trigger="click"
         theme="light"
+        disabled={!content}
+        animation="shift-away"
+        animateFill
         interactive
         allowHTML
         arrow
         {...rest}
       >
-        {children}
+        <div>{children}</div>
       </Tippy>
     </PopoverStyle>
   );

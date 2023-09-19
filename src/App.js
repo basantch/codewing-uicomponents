@@ -19,6 +19,7 @@ import {
 import { useState, useEffect } from "@wordpress/element";
 import Icons from "./controls/Icons";
 import MultiColorPicker from "./controls/color-picker/MultiColorPicker";
+import Border from "./controls/Border";
 
 const colorPalettes = [
   {
@@ -89,7 +90,7 @@ const colorPalettes = [
 ];
 
 export default function App() {
-  const [selectValue, setSelectValue] = useState("option-one");
+  const [selectValue, setSelectValue] = useState("");
   const [multiSelectValue, setMultiSelectValue] = useState([]);
   const [responsiveState, setResponsiveState] = useState("desktop");
   const [text, setText] = useState("");
@@ -154,6 +155,38 @@ export default function App() {
     initial: "#2B3034",
     hover: "#216BDB",
   });
+  const [borderStyle, setBorderStyle] = useState({
+    borderColor: "#000000",
+    borderWidth: 0,
+    borderStyle: {
+      desktop: "none",
+      tablet: "none",
+      mobile: "none",
+    },
+    borderRadius: {
+      desktop: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        unit: "px",
+      },
+      tablet: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        unit: "px",
+      },
+      mobile: {
+        top: 0,
+        right: 0,
+        bottom: 0,
+        left: 0,
+        unit: "px",
+      },
+    },
+  });
 
   useEffect(() => {
     setColor(
@@ -169,267 +202,292 @@ export default function App() {
         .find((c) => c.name === palette)
         .colors.find((n) => n.name === "Color 1").color,
     });
+    setBorderStyle({
+      ...borderStyle,
+      borderColor: colorPalettes
+        .find((c) => c.name === palette)
+        .colors.find((n) => n.name === "Color 2").color,
+    });
   }, [palette]);
 
   return (
-    <div className="controls-wrapper">
-      <Global styles={styles} />
-      <h3>Customizer Controls</h3>
-      <Select
-        help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
-        label="Select Input"
-        placeholder="Select Option"
-        divider={"top"}
-        value={selectValue}
-        options={[
-          { value: "option-one", label: "Option One" },
-          { value: "option-two", label: "Option Two" },
-          { value: "option-three", label: "Option Three" },
-          { value: "option-four", label: "Option Four" },
-          { value: "option-five", label: "Option Five" },
-        ]}
-        onChange={setSelectValue}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <Select
-        help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
-        label="Multi Select Input"
-        placeholder="Select Multiple Options..."
-        divider={"top"}
-        value={multiSelectValue}
-        options={[
-          { value: "option-one", label: "Option One" },
-          { value: "option-two", label: "Option Two" },
-          { value: "option-three", label: "Option Three" },
-          { value: "option-four", label: "Option Four" },
-          { value: "option-five", label: "Option Five" },
-        ]}
-        onChange={setMultiSelectValue}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-        isMultiple
-      />
-      <Text
-        label="Text Input"
-        placeholder="Text"
-        onChange={setText}
-        value={text}
-        divider={"top"}
-        help="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <Textarea
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Textarea"
-        placeholder="Textarea"
-        value={message}
-        onChange={setMessage}
-        divider={"top"}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <Switch
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Switch"
-        direction="horizontal"
-        value={switchButton}
-        onChange={setSwitchButton}
-        divider={"top"}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <SelectButtonGroup
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        size="lg"
-        label="Aligment"
-        divider="top"
-        options={[
-          { value: "left-alignment", icon: Icons.leftAlignment },
-          { value: "center-alignment", icon: Icons.centerAlignment },
-          { value: "right-alignment", icon: Icons.rightAlignment },
-        ]}
-        onChange={setAlignment}
-        value={alignment}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <SelectButtonGroup
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        size="lg"
-        label="Vertical Aligment"
-        divider="top"
-        options={[
-          { value: "left-alignment", icon: Icons.top },
-          { value: "center-alignment", icon: Icons.middle },
-          { value: "right-alignment", icon: Icons.bottom },
-        ]}
-        onChange={setAlignment}
-        value={alignment}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <SelectButtonGroup
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Tab"
-        divider="top"
-        options={[
-          { value: "color", label: "Color" },
-          { value: "image", label: "Image" },
-        ]}
-        onChange={setTab}
-        value={tab}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <SelectButtonGroup
-        size="lg"
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Tab"
-        divider="top"
-        options={[
-          { value: "color", label: "Color" },
-          { value: "image", label: "Image" },
-        ]}
-        onChange={setTab}
-        value={tab}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-        separate
-      />
-      <RangeSlider
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Columns"
-        divider="top"
-        value={columns}
-        onChange={setColumns}
-        min={0}
-        max={1500}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-        units={["px", "rem", "em", "pt", "vh", "vw"]}
-      />
-      <ColorPalettes
-        divider="top"
-        label="Global Color Palettes"
-        colorPalettes={colorPalettes}
-        value={palette}
-        onChange={setPalette}
-      />
-      <SingleColorPicker
-        colorPalette={colorPalettes.find((c) => c.name === palette).colors}
-        label="Color"
-        divider="top"
-        direction="horizontal"
-        title="Color"
-        value={color}
-        onChange={setColor}
-        enableAlpha
-        defaultValue="#000"
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-        units={["px", "rem", "em", "pt", "vh", "vw"]}
-      />
-      <MultiColorPicker
-        label="Multi Color"
-        divider="top"
-        direction="horizontal"
-        colors={[
-          {
-            name: "initial",
-            title: "Initial Color",
-            colorPalette: colorPalettes.find((c) => c.name === palette).colors,
-          },
-          {
-            name: "hover",
-            title: "Hover Color",
-            colorPalette: colorPalettes.find((c) => c.name === palette).colors,
-          },
-        ]}
-        value={linkColor}
-        onChange={setLinkColor}
-      />
-      <GradientColorPicker
-        title="Gradient Color Picker"
-        label="Gradient Color Picker"
-        divider="top"
-        direction="horizontal"
-        value={gradient}
-        onChange={setGradient}
-        description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-      />
-      <Spacing
-        responsive={{
-          currentState: responsiveState,
-          setState: setResponsiveState,
-        }}
-        label="Padding"
-        divider="top"
-        value={padding}
-        onChange={setPadding}
-        units={["px", "rem", "em", "pt", "vh", "vw"]}
-        min={0}
-        max={10}
-      />
-      <SelectButtonGroup
-        divider="top"
-        size="xl"
-        label="Visibility"
-        multiple
-        value={visibility}
-        options={[
-          {
-            value: "desktop",
-            icon: Icons.desktop,
-            title: "Desktop",
-          },
-          {
-            value: "tablet",
-            icon: Icons.tablet,
-            title: "Tablet",
-          },
-          {
-            value: "mobile",
-            icon: Icons.mobile,
-            title: "Mobile",
-          },
-        ]}
-        onChange={setVisibility}
-      />
-      <FileUpload
-        divider="top"
-        label="Upload 404 Image"
-        value={image}
-        onChange={setImage}
-        help="Lorem ipsum dolor sit amet consectetur adipiscing elit taciti hac, risus diam euismod varius eu nullam facilisis quam tempus eleifend"
-      />
-      <DateTimePicker
-        label="Date Time Picker"
-        divider="top"
-        value={date}
-        onChange={setDate}
-        is12Hour={true}
-        // placeholder="Updated on"
-      />
-      <InputNumber
-        label="Number of Posts"
-        direction="horizontal"
-        divider="top"
-        value={number}
-        onChange={setNumber}
-        min={-1}
-        max={11}
-      />
-    </div>
+    <>
+      <div style={{ width: "100%", textAlign: "center" }}>
+        <h3>Codewing UI Components</h3>
+      </div>
+      <div className="controls-wrapper">
+        <Global styles={styles} />
+        <Select
+          help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
+          label="Select Input"
+          placeholder="Select Option"
+          divider={"top"}
+          value={selectValue}
+          options={[
+            { value: "option-one", label: "Option One" },
+            { value: "option-two", label: "Option Two" },
+            { value: "option-three", label: "Option Three" },
+            { value: "option-four", label: "Option Four" },
+            { value: "option-five", label: "Option Five" },
+          ]}
+          onChange={setSelectValue}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <Select
+          help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
+          label="Multi Select Input"
+          placeholder="Select Multiple Options..."
+          divider={"top"}
+          value={multiSelectValue}
+          options={[
+            { value: "option-one", label: "Option One" },
+            { value: "option-two", label: "Option Two" },
+            { value: "option-three", label: "Option Three" },
+            { value: "option-four", label: "Option Four" },
+            { value: "option-five", label: "Option Five" },
+          ]}
+          onChange={setMultiSelectValue}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          isMultiple
+        />
+        <Text
+          label="Text Input"
+          placeholder="Text"
+          onChange={setText}
+          value={text}
+          divider={"top"}
+          help="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <Textarea
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Textarea"
+          placeholder="Textarea"
+          value={message}
+          onChange={setMessage}
+          divider={"top"}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <Switch
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Switch"
+          direction="horizontal"
+          value={switchButton}
+          onChange={setSwitchButton}
+          divider={"top"}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <SelectButtonGroup
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          size="lg"
+          label="Aligment"
+          divider="top"
+          options={[
+            { value: "left-alignment", icon: Icons.leftAlignment },
+            { value: "center-alignment", icon: Icons.centerAlignment },
+            { value: "right-alignment", icon: Icons.rightAlignment },
+          ]}
+          onChange={setAlignment}
+          value={alignment}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+      </div>
+      <div className="controls-wrapper">
+        <SelectButtonGroup
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          size="lg"
+          label="Vertical Aligment"
+          divider="top"
+          options={[
+            { value: "left-alignment", icon: Icons.top },
+            { value: "center-alignment", icon: Icons.middle },
+            { value: "right-alignment", icon: Icons.bottom },
+          ]}
+          onChange={setAlignment}
+          value={alignment}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <SelectButtonGroup
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Tab"
+          divider="top"
+          options={[
+            { value: "color", label: "Color" },
+            { value: "image", label: "Image" },
+          ]}
+          onChange={setTab}
+          value={tab}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <SelectButtonGroup
+          size="lg"
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Tab"
+          divider="top"
+          options={[
+            { value: "color", label: "Color" },
+            { value: "image", label: "Image" },
+          ]}
+          onChange={setTab}
+          value={tab}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          separate
+        />
+        <RangeSlider
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Columns"
+          divider="top"
+          value={columns}
+          onChange={setColumns}
+          min={0}
+          max={1500}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          units={["px", "rem", "em", "pt", "vh", "vw"]}
+        />
+        <ColorPalettes
+          divider="top"
+          label="Global Color Palettes"
+          colorPalettes={colorPalettes}
+          value={palette}
+          onChange={setPalette}
+        />
+        <SingleColorPicker
+          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          label="Color"
+          divider="top"
+          direction="horizontal"
+          title="Color"
+          value={color}
+          onChange={setColor}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          units={["px", "rem", "em", "pt", "vh", "vw"]}
+        />
+      </div>
+      <div className="controls-wrapper">
+        <MultiColorPicker
+          label="Multi Color"
+          divider="top"
+          direction="horizontal"
+          colors={[
+            {
+              name: "initial",
+              title: "Initial Color",
+              colorPalette: colorPalettes.find((c) => c.name === palette)
+                .colors,
+            },
+            {
+              name: "hover",
+              title: "Hover Color",
+              colorPalette: colorPalettes.find((c) => c.name === palette)
+                .colors,
+            },
+          ]}
+          value={linkColor}
+          onChange={setLinkColor}
+        />
+        <GradientColorPicker
+          title="Gradient Color Picker"
+          label="Gradient Color Picker"
+          divider="top"
+          direction="horizontal"
+          value={gradient}
+          onChange={setGradient}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        />
+        <Spacing
+          responsive={{
+            currentState: responsiveState,
+            setState: setResponsiveState,
+          }}
+          label="Padding"
+          divider="top"
+          value={padding}
+          onChange={setPadding}
+          units={["px", "rem", "em", "pt", "vh", "vw"]}
+          min={0}
+          max={10}
+        />
+        <SelectButtonGroup
+          divider="top"
+          size="xl"
+          label="Visibility"
+          multiple
+          value={visibility}
+          options={[
+            {
+              value: "desktop",
+              icon: Icons.desktop,
+              title: "Desktop",
+            },
+            {
+              value: "tablet",
+              icon: Icons.tablet,
+              title: "Tablet",
+            },
+            {
+              value: "mobile",
+              icon: Icons.mobile,
+              title: "Mobile",
+            },
+          ]}
+          onChange={setVisibility}
+        />
+        <FileUpload
+          divider="top"
+          label="Upload 404 Image"
+          value={image}
+          onChange={setImage}
+          help="Lorem ipsum dolor sit amet consectetur adipiscing elit taciti hac, risus diam euismod varius eu nullam facilisis quam tempus eleifend"
+        />
+        <DateTimePicker
+          label="Date Time Picker"
+          divider="top"
+          value={date}
+          onChange={setDate}
+          is12Hour={true}
+          // placeholder="Updated on"
+        />
+        <InputNumber
+          label="Number of Posts"
+          direction="horizontal"
+          divider="top"
+          value={number}
+          onChange={setNumber}
+          min={-1}
+          max={11}
+        />
+        <Border
+          help="Lorem ipsum dolor sit amet consectetur, adipiscing elit vivamus nam vehicula"
+          divider="top"
+          label="Border"
+          direction="horizontal"
+          responsiveState={responsiveState}
+          setResponsiveState={setResponsiveState}
+          value={borderStyle}
+          onChange={setBorderStyle}
+          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+        />
+      </div>
+    </>
   );
 }

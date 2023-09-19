@@ -3,17 +3,22 @@ import { useRef } from "@wordpress/element";
 import { Tooltip } from "../components";
 import Icons from "../controls/Icons";
 import "tippy.js/dist/tippy.css";
+import "tippy.js/animations/scale.css";
+import "tippy.js/animations/shift-away.css";
 
 const ControlItemStyles = styled.div`
   color: var(--primary-color);
   padding: 16px;
+  .cw__control-item {
+    padding: 0;
+  }
   &.cw__divider-top {
     border-top: 1px solid var(--background-color);
   }
   &.cw__divider-bottom {
     border-bottom: 1px solid var(--background-color);
   }
-  header {
+  > header {
     &:not(:empty) {
       display: flex;
       align-items: center;
@@ -37,7 +42,7 @@ const ControlItemStyles = styled.div`
     }
   }
   &:not(.horizontal) {
-    header {
+    > header {
       margin: 0 0 16px;
     }
   }
@@ -99,7 +104,7 @@ const ControlItemStyles = styled.div`
     .cw__color-picker-popover {
       right: 0;
     }
-    .cw__action-buttons {
+    > .cw__action-buttons {
       padding-right: 10px;
       position: relative;
       &::after {
@@ -247,6 +252,7 @@ const ControlGroup =
         )}
         <section className={className || ""}>
           <Component
+            changed={_ref.current !== value}
             value={responsive ? value[responsive?.currentState] : value}
             onChange={(res) => handleOnChange(res)}
             {...rest}

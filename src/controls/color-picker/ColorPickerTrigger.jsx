@@ -1,8 +1,10 @@
 import styled from "@emotion/styled";
-import { useState } from "@wordpress/element";
 import { Tooltip, Popover } from "../../components";
 
 const ColorPickerStyles = styled.div`
+  [aria-expanded] {
+    display: flex;
+  }
   .cw__color-picker-color-block {
     display: inline-block;
     width: 32px;
@@ -25,26 +27,21 @@ const ColorPickerStyles = styled.div`
       outline-offset: 2px;
     }
   }
-  .cw_popover {
-    padding: 12px;
-  }
 `;
 
 const ColorPickerTrigger = ({ color, title, children }) => {
   return (
     <ColorPickerStyles className={`cw__color-picker-trigger`}>
       <Popover content={children}>
-        <div>
-          <Tooltip title={title}>
-            <span
-              tabIndex={0}
-              className="cw__color-picker-color-block"
-              style={{ background: color }}
-            >
-              <span className="cw__color-picker-color-block-inner"></span>
-            </span>
-          </Tooltip>
-        </div>
+        <Tooltip title={title}>
+          <span
+            tabIndex={0}
+            className="cw__color-picker-color-block"
+            style={{ background: color }}
+          >
+            <span className="cw__color-picker-color-block-inner"></span>
+          </span>
+        </Tooltip>
       </Popover>
     </ColorPickerStyles>
   );

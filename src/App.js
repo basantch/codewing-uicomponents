@@ -7,6 +7,7 @@ import {
   RangeSlider,
   Select,
   SingleColorPicker,
+  MultiColorPicker,
   Spacing,
   Switch,
   Text,
@@ -15,11 +16,11 @@ import {
   DateTimePicker,
   InputNumber,
   ColorPalettes,
+  Border,
+  BoxShadow,
 } from "./controls";
 import { useState, useEffect } from "@wordpress/element";
 import Icons from "./controls/Icons";
-import MultiColorPicker from "./controls/color-picker/MultiColorPicker";
-import Border from "./controls/Border";
 
 const colorPalettes = [
   {
@@ -109,9 +110,9 @@ export default function App() {
     "linear-gradient(135deg, rgb(6, 147, 227) 13%, rgb(163, 45, 45) 48%, rgb(155, 81, 224) 83%)",
   );
   const [switchButton, setSwitchButton] = useState({
-    desktop: "",
-    tablet: "",
-    mobile: "",
+    desktop: false,
+    tablet: false,
+    mobile: false,
   });
   const [alignment, setAlignment] = useState({
     desktop: "left-alignment",
@@ -188,6 +189,16 @@ export default function App() {
     },
   });
 
+  const [boxShadow, setBoxShadow] = useState({
+    enable: false,
+    color: "",
+    horizontal: { value: 0, unit: "px" },
+    vertical: { value: 0, unit: "px" },
+    blur: { value: 0, unit: "px" },
+    spread: { value: 0, unit: "px" },
+    position: "inset",
+  });
+
   useEffect(() => {
     setColor(
       colorPalettes
@@ -207,6 +218,12 @@ export default function App() {
       borderColor: colorPalettes
         .find((c) => c.name === palette)
         .colors.find((n) => n.name === "Color 2").color,
+    });
+    setBoxShadow({
+      ...boxShadow,
+      color: colorPalettes
+        .find((c) => c.name === palette)
+        .colors.find((n) => n.name === "Color 5").color,
     });
   }, [palette]);
 
@@ -486,6 +503,16 @@ export default function App() {
           value={borderStyle}
           onChange={setBorderStyle}
           colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          units={["px", "rem", "em", "pt", "vh", "vw"]}
+        />
+        <BoxShadow
+          divider="top"
+          label="Box Shadow"
+          direction="horizontal"
+          value={boxShadow}
+          onChange={setBoxShadow}
+          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          units={["px", "rem", "em", "pt", "vh", "vw"]}
         />
       </div>
     </>

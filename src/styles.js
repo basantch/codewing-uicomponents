@@ -43,6 +43,11 @@ const styles = css`
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
       Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
       "Segoe UI Symbol";
+    .controls-wrapper {
+      max-width: 320px;
+      border: 1px solid #efefef;
+      position: relative;
+    }
     .cw__date-popover {
       background-color: #ffffff;
       font-size: 13px;

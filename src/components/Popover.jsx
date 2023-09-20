@@ -19,7 +19,7 @@ const PopoverStyle = styled.div`
     }
   }
   [data-placement^="top"] {
-    .tippy-arrow {
+    > .tippy-arrow {
       &::before {
         border-bottom-color: var(--border-color);
         border-right-color: var(--border-color);
@@ -27,7 +27,7 @@ const PopoverStyle = styled.div`
     }
   }
   [data-placement^="bottom"] {
-    .tippy-arrow {
+    > .tippy-arrow {
       &::before {
         border-top-color: var(--border-color);
         border-left-color: var(--border-color);
@@ -35,7 +35,7 @@ const PopoverStyle = styled.div`
     }
   }
   [data-placement^="left"] {
-    .tippy-arrow {
+    > .tippy-arrow {
       &::before {
         border-top-color: var(--border-color);
         border-right-color: var(--border-color);
@@ -43,7 +43,7 @@ const PopoverStyle = styled.div`
     }
   }
   [data-placement^="right"] {
-    .tippy-arrow {
+    > .tippy-arrow {
       &::before {
         border-left-color: var(--border-color);
         border-bottom-color: var(--border-color);

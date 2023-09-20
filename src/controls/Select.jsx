@@ -221,6 +221,9 @@ const Select = ({
           : _value,
       );
       selectInput.current.focus();
+      if (!isMultiple) {
+        setOpen(false);
+      }
     }
     escape(e);
   };

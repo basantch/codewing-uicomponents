@@ -91,9 +91,7 @@ const ControlItemStyles = styled.div`
     justify-content: space-between;
     column-gap: 8px;
     > section {
-      input {
-        max-width: 150px;
-      }
+      max-width: 150px;
     }
     .cw__custom-select {
       .select-dropdown {
@@ -104,7 +102,7 @@ const ControlItemStyles = styled.div`
     .cw__color-picker-popover {
       right: 0;
     }
-    > .cw__action-buttons {
+    > header > .cw__action-buttons {
       padding-right: 10px;
       position: relative;
       &::after {
@@ -197,6 +195,7 @@ const ControlGroup =
     defaultValue,
     onChange,
     responsive,
+    isChildren,
     help,
     ...rest
   }) => {
@@ -210,8 +209,11 @@ const ControlGroup =
         responsive ? { ...value, [responsive?.currentState]: _value } : _value,
       );
     };
-
     const border = divider ? ` cw__divider-${divider}` : "";
+
+    const preValue = JSON.stringify(_ref.current);
+    const currentValue = JSON.stringify(value);
+
     return (
       <ControlItemStyles
         className={`cw__control-item ${direction || ""}${border}`}
@@ -226,9 +228,9 @@ const ControlGroup =
                 </Tooltip>
               )}
             </label>
-            {(_ref.current !== value || responsive) && (
+            {((!isChildren && preValue !== currentValue) || responsive) && (
               <div className="cw__action-buttons">
-                {_ref.current !== value && (
+                {!isChildren && preValue !== currentValue && (
                   <button
                     tabIndex={0}
                     className="cw__reset-button"
@@ -252,7 +254,7 @@ const ControlGroup =
         )}
         <section className={className || ""}>
           <Component
-            changed={_ref.current !== value}
+            changed={preValue !== currentValue ? true : false}
             value={responsive ? value[responsive?.currentState] : value}
             onChange={(res) => handleOnChange(res)}
             {...rest}

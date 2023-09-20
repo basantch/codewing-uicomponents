@@ -11,9 +11,10 @@ const MultiColorPickerStyle = styled.div`
 const MultiColorPicker = ({ colors, value, onChange, ...ControlGroup }) => {
   return (
     <MultiColorPickerStyle>
-      {colors?.map(({ title, name, colorPalette }) => {
+      {colors?.map(({ title, name, colorPalette }, i) => {
         return (
           <SingleColorPicker
+            key={i}
             value={value[name]}
             title={title}
             colorPalette={colorPalette}

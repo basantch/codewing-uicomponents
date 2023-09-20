@@ -12,8 +12,8 @@ const RangeStyles = styled.div`
       .components-input-control__input {
         border: none;
         background-color: var(--background-color);
-        padding-left: 10px;
-        padding-right: 10px;
+        padding-left: 5px;
+        padding-right: 5px;
       }
       .components-range-control__track,
       span[class*="-Rail-railBackgroundColor"] {
@@ -49,7 +49,7 @@ const RangeStyles = styled.div`
       transform: translateY(-50%);
       top: 50%;
       margin-top: 0;
-      margin-left: -12px;
+      margin-left: -11px;
       > span {
         background-color: #ffffff;
         box-shadow: 0 0 0 2px #e6e6e6;
@@ -73,7 +73,7 @@ const RangeStyles = styled.div`
   }
   &.cw__has-unit {
     .components-input-control__container {
-      max-width: 50px;
+      max-width: 40px;
     }
     .components-input-control__input {
       border-top-right-radius: 0 !important;
@@ -108,7 +108,7 @@ const RangeStyles = styled.div`
 
 const RangeSlider = ({ units, value, onChange, ...ControlGroup }) => {
   return (
-    <RangeStyles className={units ? "cw__has-unit" : ""}>
+    <RangeStyles className={units || value?.unit ? "cw__has-unit" : ""}>
       <RangeControl
         value={value.value}
         onChange={(val) => onChange({ ...value, value: val })}

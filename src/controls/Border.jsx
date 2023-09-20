@@ -1,7 +1,7 @@
 import { InputNumber, SingleColorPicker, Select, Spacing } from "./";
 import ControlGroup from "../containers/ControlGroup";
 import styled from "@emotion/styled";
-import { Popover } from "../components";
+import { Popover, PopoverButton } from "../components";
 import Icons from "./Icons";
 
 const BorderStyle = styled.div`
@@ -10,24 +10,12 @@ const BorderStyle = styled.div`
   gap: 8px;
 `;
 
-const PopoverButton = styled.button`
-  padding: 4px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
-  cursor: pointer;
-  background: none;
-  &:hover,
-  &.changed {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
-  }
-`;
-
 const PopoverContent = ({
   value,
   onChange,
   responsiveState,
   setResponsiveState,
+  units,
 }) => {
   const { borderWidth, borderStyle, borderRadius } = value;
   return (
@@ -37,6 +25,7 @@ const PopoverContent = ({
         direction="horizontal"
         value={borderWidth}
         onChange={(_width) => onChange({ ...value, borderWidth: _width })}
+        isChildren
       />
       <Select
         responsive={{
@@ -53,6 +42,7 @@ const PopoverContent = ({
         ]}
         value={borderStyle}
         onChange={(_style) => onChange({ ...value, borderStyle: _style })}
+        isChildren
       />
       <Spacing
         responsive={{
@@ -61,8 +51,9 @@ const PopoverContent = ({
         }}
         label="Border Radius"
         value={borderRadius}
-        units={["px", "%", "em", "rem"]}
+        units={units}
         onChange={(_radius) => onChange({ ...value, borderRadius: _radius })}
+        isChildren
       />
     </>
   );
@@ -90,9 +81,7 @@ const Border = ({
           <PopoverContent value={value} onChange={onChange} {...ControlGroup} />
         }
       >
-        <PopoverButton type="button" className={changed ? "changed" : ""}>
-          {Icons.pen}
-        </PopoverButton>
+        <PopoverButton changed={changed} />
       </Popover>
     </BorderStyle>
   );

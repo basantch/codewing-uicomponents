@@ -51,6 +51,14 @@ const SelectStyles = styled.div`
     cursor: default;
   }
   .cw__select-dropdown {
+    padding: 6px;
+    margin: 6px 0 0;
+    background-color: #ffffff;
+    border-radius: var(--border-radius);
+    box-shadow:
+      0px 4px 6px -2px #10182808,
+      0px 12px 16px -4px #10182814;
+    border: 1px solid var(--border-color);
     padding-top: 0.5rem;
     position: absolute;
     top: 100%;
@@ -58,21 +66,25 @@ const SelectStyles = styled.div`
     min-width: 100%;
     z-index: 1;
     animation: fadeInDown 0.2s ease;
+    input[type="search"] {
+      margin: 0 0 8px;
+    }
+    .cw__404-text {
+      display: block;
+      text-align: center;
+      color: #ff0e0e;
+      font-weight: 600;
+      padding: 6px;
+    }
   }
   .cw__select-options {
-    list-style: none;
-    padding: 6px;
+    padding: 0;
     margin: 0;
-    background-color: #ffffff;
-    border-radius: var(--border-radius);
-    box-shadow:
-      0px 4px 6px -2px #10182808,
-      0px 12px 16px -4px #10182814;
-    border: 1px solid var(--border-color);
+    list-style: none;
     max-height: 202px;
     overflow-y: auto;
     li {
-      padding: 12.5px 14px;
+      padding: 10.5px 8px;
       cursor: default;
       border-radius: var(--border-radius);
       color: #2b3034;
@@ -95,6 +107,7 @@ const SelectStyles = styled.div`
         background-size: 20px 20px;
         background-repeat: no-repeat;
         background-position: center right 10px;
+        padding-right: 40px;
       }
       .icon {
         display: inline-flex;
@@ -110,6 +123,7 @@ const SelectStyles = styled.div`
     }
   }
   .cw__custom-select__input-wrapper {
+    min-width: 100px;
     color: #2b3034;
     border: 1px solid var(--border-color);
     border-radius: var(--border-radius);
@@ -141,6 +155,11 @@ const SelectStyles = styled.div`
   &.is-multiple {
     &::after {
       content: none;
+    }
+  }
+  &:not(.is-multiple) {
+    .cw__custom-select__input-wrapper {
+      padding-right: 32px;
     }
   }
 `;
@@ -178,8 +197,8 @@ const SelectedBadge = ({ text, onCancel }) => {
 };
 
 const removeItems = (a, b) => {
-  return a.filter((item) => {
-    return b.indexOf(item.value) < 0;
+  return a?.filter((item) => {
+    return b?.indexOf(item.value) < 0;
   });
 };
 
@@ -188,6 +207,7 @@ const Select = ({
   options,
   value,
   isMultiple,
+  isSearchable,
   placeholder,
   ...ControlGroup
 }) => {
@@ -198,9 +218,7 @@ const Select = ({
 
   useEffect(() => {
     if (isMultiple) {
-      setSelectOptions(
-        value.length > 0 ? removeItems(options, value) : options,
-      );
+      setSelectOptions(removeItems(options, value));
     }
   }, [value]);
 
@@ -221,11 +239,7 @@ const Select = ({
           : _value,
       );
       selectInput.current.focus();
-      if (!isMultiple) {
-        setOpen(false);
-      }
     }
-    escape(e);
   };
 
   const handleOpenOnKeyDown = (e) => {
@@ -234,6 +248,17 @@ const Select = ({
       selectInput.current.focus();
     }
     escape(e);
+  };
+
+  const handleOnSearch = (e) => {
+    const keywords = e.target.value.toLowerCase();
+    setSelectOptions(
+      isMultiple
+        ? removeItems(options, value).filter((f) =>
+            f.label.toLowerCase().startsWith(keywords),
+          )
+        : options.filter((f) => f.label.toLowerCase().startsWith(keywords)),
+    );
   };
 
   return (
@@ -272,17 +297,19 @@ const Select = ({
           {placeholder && value?.length <= 0 && (
             <span className="placeholder">{placeholder}</span>
           )}
-          <input
-            type="hidden"
-            className="cw__custom-select__input"
-            onChange={(e) => onChange(e.target.value)}
-            value={chosen?.label}
-            placeholder={placeholder}
-            {...ControlGroup}
-          />
         </div>
-        {selectOptions.length > 0 && open && (
+        {selectOptions && open && (
           <div className="cw__select-dropdown">
+            {isSearchable && (
+              <input
+                type="search"
+                placeholder="Search..."
+                onChange={handleOnSearch}
+              />
+            )}
+            {selectOptions.length <= 0 && (
+              <span className="cw__404-text">There is no options!</span>
+            )}
             <ul className="cw__select-options">
               {selectOptions?.map(({ value: _value, label, icon }, i) => {
                 const selected = value?.includes(_value);

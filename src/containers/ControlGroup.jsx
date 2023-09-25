@@ -94,7 +94,7 @@ const ControlItemStyles = styled.div`
       max-width: 150px;
     }
     .cw__custom-select {
-      .select-dropdown {
+      .cw__select-dropdown {
         left: auto;
         right: 0;
       }
@@ -254,7 +254,7 @@ const ControlGroup =
         )}
         <section className={className || ""}>
           <Component
-            changed={preValue !== currentValue ? true : false}
+            changed={preValue !== currentValue ? 1 : 0}
             value={responsive ? value[responsive?.currentState] : value}
             onChange={(res) => handleOnChange(res)}
             {...rest}

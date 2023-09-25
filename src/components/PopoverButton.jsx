@@ -16,7 +16,7 @@ const PopoverButtonStyle = styled.button`
 
 const PopoverButton = ({ changed }) => {
   return (
-    <PopoverButtonStyle type="button" className={changed ? "changed" : ""}>
+    <PopoverButtonStyle type="button" className={changed === 1 ? "changed" : ""}>
       {Icons.pen}
     </PopoverButtonStyle>
   );

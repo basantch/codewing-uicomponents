@@ -18,6 +18,7 @@ import {
   ColorPalettes,
   Border,
   BoxShadow,
+  Typography,
 } from "./controls";
 import { useState, useEffect } from "@wordpress/element";
 import Icons from "./controls/Icons";
@@ -199,6 +200,34 @@ export default function App() {
     position: "inset",
   });
 
+  const [font, setFont] = useState({
+    family: "default",
+    size: {
+      desktop: { value: 16, unit: "px" },
+      tablet: { value: 16, unit: "px" },
+      mobile: { value: 16, unit: "px" },
+    },
+    "line-height": {
+      desktop: { value: "", unit: "px" },
+      tablet: { value: "", unit: "px" },
+      mobile: { value: "", unit: "px" },
+    },
+    "letter-spacing": {
+      desktop: { value: "", unit: "px" },
+      tablet: { value: "", unit: "px" },
+      mobile: { value: "", unit: "px" },
+    },
+    "word-spacing": {
+      desktop: { value: "", unit: "px" },
+      tablet: { value: "", unit: "px" },
+      mobile: { value: "", unit: "px" },
+    },
+    weight: "normal",
+    style: "default",
+    transform: "default",
+    decoration: "default",
+  });
+
   useEffect(() => {
     setColor(
       colorPalettes
@@ -249,6 +278,7 @@ export default function App() {
           ]}
           onChange={setSelectValue}
           description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          isSearchable
         />
         <Select
           help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
@@ -513,6 +543,17 @@ export default function App() {
           onChange={setBoxShadow}
           colorPalette={colorPalettes.find((c) => c.name === palette).colors}
           units={["px", "rem", "em", "pt", "vh", "vw"]}
+        />
+        <Typography
+          divider="top"
+          direction="horizontal"
+          label="Typography"
+          value={font}
+          onChange={setFont}
+          responsiveState={responsiveState}
+          setResponsiveState={setResponsiveState}
+          fontFamilies={[]}
+          fontWeights={[{ value: "normal", label: "Normal" }]}
         />
       </div>
     </>

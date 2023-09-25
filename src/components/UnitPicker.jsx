@@ -88,7 +88,7 @@ const UnitPicker = ({ value, onChange, units }) => {
   };
 
   const handleSelectOnKeyDown = (_unit) => (e) => {
-    if (e.type === "keydown" && e.key === "Enter") {
+    if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
       onChange(_unit);
       setOpen(false);
     }
@@ -112,10 +112,7 @@ const UnitPicker = ({ value, onChange, units }) => {
                 <span
                   key={unit}
                   tabIndex={0}
-                  onClick={() => {
-                    onChange(unit);
-                    setOpen(false);
-                  }}
+                  onClick={handleSelectOnKeyDown(unit)}
                   onKeyDown={handleSelectOnKeyDown(unit)}
                 >
                   {unit}

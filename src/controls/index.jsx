@@ -14,3 +14,4 @@ export { default as DateTimePicker } from "./DateTimePicker";
 export { default as InputNumber } from "./InputNumber";
 export { default as Border } from "./Border";
 export { default as BoxShadow } from "./BoxShadow";
+export { default as Typography } from "./Typography";

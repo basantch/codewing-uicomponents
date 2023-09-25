@@ -87,7 +87,7 @@ export default ({ content, children, className, ...rest }) => {
         theme="light"
         disabled={!content}
         animation="shift-away"
-        animateFill
+        // animateFill={true}
         interactive
         allowHTML
         arrow

@@ -147,12 +147,12 @@ const SelectButtonGroup = ({
   onChange,
   value,
   separate,
-  multiple,
+  isMultiple,
   size,
   ...ControlGroup
 }) => {
   const handleOnChange = (_value) => () => {
-    if (multiple) {
+    if (isMultiple) {
       onChange(
         !value.includes(_value)
           ? [...value, _value]
@@ -170,7 +170,7 @@ const SelectButtonGroup = ({
       } ${size || ""}`}
     >
       {options.map(({ value: _value, ...rest }) => {
-        const _checked = multiple ? value.includes(_value) : value === _value;
+        const _checked = isMultiple ? value.includes(_value) : value === _value;
         const { ..._rest } = { ...ControlGroup, ...rest };
         return (
           <SelectButton

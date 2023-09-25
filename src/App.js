@@ -478,7 +478,7 @@ export default function App() {
           divider="top"
           size="xl"
           label="Visibility"
-          multiple
+          isMultiple
           value={visibility}
           options={[
             {

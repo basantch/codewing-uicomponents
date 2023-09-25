@@ -90,7 +90,7 @@ const SelectButtonGroupStyles = styled.div`
 
 const sizes = {
   sm: "14px",
-  m: "16px",
+  md: "16px",
   lg: "18px",
   xl: "20px",
 };

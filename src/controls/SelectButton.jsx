@@ -118,9 +118,8 @@ const SelectButton = ({
         className={`cw__select-button${
           (checked && " cw__select-button-checked") || ""
         }`}
-        style={style}
         onKeyDown={handleSelectOnKeyDown}
-        style={{ fontSize: sizes[size] }}
+        style={{ fontSize: sizes[size], ...style }}
       >
         <span className="cw__select-button">
           <input

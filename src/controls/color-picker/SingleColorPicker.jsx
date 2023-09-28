@@ -5,8 +5,8 @@ import ColorPickerTrigger from "./ColorPickerTrigger";
 
 const ColorPickerHeader = styled.header`
   padding: 5px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+  border: 1px solid var(--cw__border-color);
+  border-radius: var(--cw__border-radius);
   margin: 0 -4px 13px;
 `;
 

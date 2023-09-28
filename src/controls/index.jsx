@@ -15,3 +15,5 @@ export { default as InputNumber } from "./InputNumber";
 export { default as Border } from "./Border";
 export { default as BoxShadow } from "./BoxShadow";
 export { default as Typography } from "./Typography";
+export {default as FeaturedImage} from "./FeaturedImage";
+export { default as Sortable } from "./sortable/Sortable";

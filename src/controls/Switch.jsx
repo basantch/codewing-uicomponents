@@ -7,8 +7,8 @@ const SwitchStyles = styled.div`
     border-radius: 45px;
     background-color: #d1d1d1;
     position: relative;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
+    box-shadow: var(--cw__box-shadow);
+    transition: var(--cw__transition);
     cursor: pointer;
     span{
         content: "";
@@ -19,11 +19,11 @@ const SwitchStyles = styled.div`
         position: absolute;
         top: 2px;
         left: 2px;
-        transition: var(--transition);
+        transition: var(--cw__transition);
         box-shadow: 2px 0px 4px rgba(0,0,0, .1)
     }
     &.checked{
-        background-color: var(--secondary-color);
+        background-color: var(--cw__secondary-color);
         span{
             left: 20px;
             box-shadow: -2px 0px 4px rgba(0,0,0, .1)

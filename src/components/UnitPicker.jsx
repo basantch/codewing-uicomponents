@@ -12,13 +12,13 @@ const UnitPickerStyles = styled.div`
   button {
     min-width: 40px;
     border: none;
-    border-radius: var(--border-radius);
-    background-color: var(--background-color);
+    border-radius: var(--cw__border-radius);
+    background-color: var(--cw__background-color);
     cursor: pointer;
     min-height: 36px;
     text-transform: uppercase;
     &:hover {
-      color: var(--secondary-color);
+      color: var(--cw__secondary-color);
     }
     &:focus {
       outline: 1px dotted;
@@ -27,8 +27,8 @@ const UnitPickerStyles = styled.div`
   .cw__unit-picker-options {
     max-width: 72px;
     width: 72px;
-    border-radius: var(--border-radius);
-    background-color: var(--background-color);
+    border-radius: var(--cw__border-radius);
+    background-color: var(--cw__background-color);
     display: flex;
     flex-wrap: wrap;
     position: absolute;
@@ -37,12 +37,12 @@ const UnitPickerStyles = styled.div`
     left: -17.5px;
     right: -17.5px;
     animation: fadeInUp 0.1s ease;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--cw__border-color);
     &::before,
     &::after {
       content: "";
       border: 6px solid transparent;
-      border-top-color: var(--background-color);
+      border-top-color: var(--cw__background-color);
       position: absolute;
       left: 50%;
       top: 100%;
@@ -107,10 +107,10 @@ const UnitPicker = ({ value, onChange, units }) => {
         </button>
         {units && open && (
           <div className="cw__unit-picker-options">
-            {units?.map((unit) => {
+            {units?.map((unit, i) => {
               return (
                 <span
-                  key={unit}
+                  key={i}
                   tabIndex={0}
                   onClick={handleSelectOnKeyDown(unit)}
                   onKeyDown={handleSelectOnKeyDown(unit)}

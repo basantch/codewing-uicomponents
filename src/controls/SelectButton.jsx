@@ -9,15 +9,14 @@ const SelectButtonStyles = styled.label`
   position: relative;
   margin: 0;
   padding: 10px;
-  border-radius: var(--border-radius);
-  background-color: var(--background-color);
-  color: var(--inactive-color);
+  border-radius: var(--cw__border-radius);
+  background-color: var(--cw__background-color);
+  color: var(--cw__inactive-color);
   cursor: pointer;
   text-align: center;
   font-size: 14px;
   font-weight: 600;
-  transition: var(--transition);
-  position: relative;
+  transition: var(--cw__transition);
   .cw__select-button {
     position: absolute;
     inset-block-start: 0;
@@ -44,15 +43,15 @@ const SelectButtonStyles = styled.label`
     pointer-events: none;
   }
   &.cw__select-button-wrapper-checked {
-    background-color: var(--secondary-color);
+    background-color: var(--cw__secondary-color);
     color: #ffffff;
   }
 `;
 
 const SelectButtonGroupStyles = styled.div`
   padding: 6px;
-  border-radius: var(--border-radius);
-  background-color: var(--background-color);
+  border-radius: var(--cw__border-radius);
+  background-color: var(--cw__background-color);
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -68,8 +67,8 @@ const SelectButtonGroupStyles = styled.div`
     width: 100%;
     &.cw__select-button-checked {
       background-color: #ffffff;
-      color: var(--secondary-color);
-      box-shadow: var(--box-shadow);
+      color: var(--cw__secondary-color);
+      box-shadow: var(--cw__box-shadow);
     }
   }
   &.cw__separate {
@@ -78,10 +77,10 @@ const SelectButtonGroupStyles = styled.div`
     border-radius: 0;
     gap: 15px;
     .cw__select-button {
-      border: 1px solid var(--border-color);
+      border: 1px solid var(--cw__border-color);
       background: none;
       &.cw__select-button-checked {
-        border-color: var(--secondary-color);
+        border-color: var(--cw__secondary-color);
         box-shadow: none;
       }
     }
@@ -115,9 +114,8 @@ const SelectButton = ({
     <Tooltip title={title}>
       <SelectButtonStyles
         tabIndex={0}
-        className={`cw__select-button${
-          (checked && " cw__select-button-checked") || ""
-        }`}
+        className={`cw__select-button${(checked && " cw__select-button-checked") || ""
+          }`}
         onKeyDown={handleSelectOnKeyDown}
         style={{ fontSize: sizes[size], ...style }}
       >
@@ -164,17 +162,16 @@ const SelectButtonGroup = ({
 
   return (
     <SelectButtonGroupStyles
-      className={`cw__select-button-group ${className || ""} ${
-        separate ? "cw__separate" : ""
-      } ${size || ""}`}
+      className={`cw__select-button-group ${className || ""} ${separate ? "cw__separate" : ""
+        } ${size || ""}`}
     >
-      {options.map(({ value: _value, ...rest }) => {
+      {options.map(({ value: _value, ...rest }, i) => {
         const _checked = isMultiple ? value.includes(_value) : value === _value;
         const { ..._rest } = { ...ControlGroup, ...rest };
         return (
           <SelectButton
+            key={i}
             size={size}
-            key={_value}
             value={_value}
             checked={_checked}
             onChange={handleOnChange(_value)}

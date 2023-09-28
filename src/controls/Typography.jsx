@@ -34,8 +34,11 @@ const TypographyContent = ({
         value={family}
         onChange={(val) => handleOnChange("family", val)}
         options={fontFamilies}
+        placeholder="Select Font Family"
+        variant="solid"
         isChildren
         isSearchable
+        style={{ width: "136px" }}
       />
       <RangeSlider
         label="Size"
@@ -91,7 +94,9 @@ const TypographyContent = ({
         value={weight}
         options={fontWeights}
         onChange={(val) => handleOnChange("weight", val)}
+        variant="solid"
         isChildren
+        style={{ width: "136px" }}
       />
       <Select
         label="Style"
@@ -104,7 +109,9 @@ const TypographyContent = ({
         ]}
         value={style}
         onChange={(val) => handleOnChange("style", val)}
+        variant="solid"
         isChildren
+        style={{ width: "136px" }}
       />
       <Select
         label="Transform"
@@ -118,7 +125,9 @@ const TypographyContent = ({
         ]}
         value={transform}
         onChange={(val) => handleOnChange("transform", val)}
+        variant="solid"
         isChildren
+        style={{ width: "136px" }}
       />
       <Select
         label="Decoration"
@@ -132,7 +141,9 @@ const TypographyContent = ({
         ]}
         value={decoration}
         onChange={(val) => handleOnChange("decoration", val)}
+        variant="solid"
         isChildren
+        style={{ width: "136px" }}
       />
     </>
   );

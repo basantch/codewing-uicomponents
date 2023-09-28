@@ -1,22 +1,24 @@
 import styled from "@emotion/styled";
 import { useRef } from "@wordpress/element";
 import { Tooltip } from "../components";
-import Icons from "../controls/Icons";
+import Icons from "../assets/Icons";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
 import "tippy.js/animations/shift-away.css";
 
 const ControlItemStyles = styled.div`
-  color: var(--primary-color);
+  color: var(--cw__primary-color);
   padding: 16px;
   .cw__control-item {
     padding: 0;
   }
   &.cw__divider-top {
-    border-top: 1px solid var(--background-color);
+    border-top: 1px solid var(--cw__background-color);
+    padding-top: 16px;
   }
   &.cw__divider-bottom {
-    border-bottom: 1px solid var(--background-color);
+    border-bottom: 1px solid var(--cw__background-color);
+    padding-bottom: 16px;
   }
   > header {
     &:not(:empty) {
@@ -65,7 +67,7 @@ const ControlItemStyles = styled.div`
     background-size: 100%;
     font-size: 0;
     cursor: pointer;
-    transition: var(--transition);
+    transition: var(--cw__transition);
     &:hover {
       transform: rotate(-30deg);
     }
@@ -77,7 +79,7 @@ const ControlItemStyles = styled.div`
       content: "";
       width: 0;
       height: 14px;
-      border-left: 2px solid var(--border-color);
+      border-left: 2px solid var(--cw__border-color);
       position: absolute;
       top: 50%;
       left: 0;
@@ -109,7 +111,7 @@ const ControlItemStyles = styled.div`
         content: "";
         width: 0;
         height: 14px;
-        border-right: 2px solid var(--border-color);
+        border-right: 2px solid var(--cw__border-color);
         position: absolute;
         top: 50%;
         right: 0;
@@ -126,8 +128,8 @@ const ResponsiveButtons = styled.div`
   .cw__responsive-button {
     font-size: 15px;
     cursor: pointer;
-    color: var(--inactive-color);
-    transition: var(--transition);
+    color: var(--cw__inactive-color);
+    transition: var(--cw__transition);
     padding: 0;
     border: none;
     background: none;
@@ -138,7 +140,7 @@ const ResponsiveButtons = styled.div`
     }
     &:hover,
     &.active {
-      color: var(--secondary-color);
+      color: var(--cw__secondary-color);
     }
   }
 `;

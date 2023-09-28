@@ -1,16 +1,21 @@
 import styled from "@emotion/styled";
-import Icons from "../controls/Icons";
+import Icons from "../assets/Icons";
 
 const PopoverButtonStyle = styled.button`
   padding: 4px;
-  border: 1px solid var(--border-color);
-  border-radius: var(--border-radius);
+  // border: 1px solid var(--cw__border-color);
+  border: none;
+  border-radius: var(--cw__border-radius);
   cursor: pointer;
   background: none;
+  box-shadow: 0 0 0 1px var(--cw__border-color);
   &:hover,
   &.changed {
-    color: var(--secondary-color);
-    border-color: var(--secondary-color);
+    color: var(--cw__secondary-color);
+    box-shadow: 0 0 0 1px var(--cw__secondary-color);
+  }
+  svg{
+    vertical-align: top;
   }
 `;
 

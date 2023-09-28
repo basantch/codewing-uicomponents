@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import ControlGroup from "../containers/ControlGroup";
-import Icons from "./Icons";
+import Icons from "../assets/Icons";
 
 const NumberStyles = styled.div`
     display: inline-flex;
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
+    background-color: var(--cw__background-color);
+    border-radius: var(--cw__border-radius);
     input[type=number]{
         padding: 4px;
         border: none;
@@ -25,12 +25,12 @@ const NumberStyles = styled.div`
         display: flex;
         align-items: center;
         &:hover{
-            color: var(--secondary-color);
+            color: var(--cw__secondary-color);
         }
         &:disabled{
             cursor: not-allowed;
             pointer-event: none;
-            color: var(--inactive-color);
+            color: var(--cw__inactive-color);
             opacity: .5;
         }
     }

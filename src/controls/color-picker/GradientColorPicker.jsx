@@ -9,7 +9,7 @@ const GradientPickerStyles = styled.div`
     position: relative;
     .components-custom-gradient-picker__gradient-bar-background {
       height: 50px;
-      border-radius: var(--border-radius);
+      border-radius: var(--cw__border-radius);
     }
     .components-custom-gradient-picker__control-point-dropdown {
       position: absolute;

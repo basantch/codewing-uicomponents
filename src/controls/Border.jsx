@@ -2,7 +2,7 @@ import { InputNumber, SingleColorPicker, Select, Spacing } from "./";
 import ControlGroup from "../containers/ControlGroup";
 import styled from "@emotion/styled";
 import { Popover, PopoverButton } from "../components";
-import Icons from "./Icons";
+import Icons from "../assets/Icons";
 
 const BorderStyle = styled.div`
   display: inline-flex;

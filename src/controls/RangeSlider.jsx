@@ -11,63 +11,9 @@ const RangeStyles = styled.div`
       margin-bottom: 0;
       .components-input-control__input {
         border: none;
-        background-color: var(--background-color);
+        background-color: var(--cw__background-color);
         padding-left: 5px;
         padding-right: 5px;
-      }
-      .components-range-control__track,
-      span[class*="-Rail-railBackgroundColor"] {
-        height: 6px;
-      }
-      span[class*="-Rail-railBackgroundColor"] {
-        background-color: #e0e3e7;
-      }
-      .components-range-control__tooltip {
-        font-size: 13px;
-        line-height: 17.3px;
-        padding: 8px;
-        border-radius: var(--border-radius);
-        background-color: #2b3034;
-        bottom: 100%;
-        margin-bottom: 10px;
-        &::after {
-          content: "";
-          border: 6px solid transparent;
-          border-top-color: #2b3034;
-          position: absolute;
-          top: 100%;
-          left: 50%;
-          transform: translateX(-50%);
-        }
-      }
-    }
-  }
-  .components-range-control__wrapper {
-    .components-range-control__thumb-wrapper {
-      width: 20px;
-      height: 20px;
-      transform: translateY(-50%);
-      top: 50%;
-      margin-top: 0;
-      margin-left: -11px;
-      > span {
-        background-color: #ffffff;
-        box-shadow: 0 0 0 2px #e6e6e6;
-        background-image: url("data:image/svg+xml,%3Csvg width='12' height='6' viewBox='0 0 12 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M3.40393 5.22144L1.40393 3.22144L3.40393 1.22144' stroke='%2393999F' strokeLinecap='round' strokeLinejoin='round'/%3E%3Cpath d='M8.73718 1.22144L10.7372 3.22144L8.73718 5.22144' stroke='%2393999F' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
-        background-repeat: no-repeat;
-        background-size: 12px;
-        background-position: center;
-        &::before {
-          width: calc(100% + 12px);
-          height: calc(100% + 12px);
-          top: -6px;
-          left: -6px;
-          opacity: 0.15;
-          z-index: -1;
-        }
-      }
-      > span[class*="-thumbFocus"] {
-        box-shadow: 0 0 0 2px var(--secondary-color);
       }
     }
   }
@@ -92,7 +38,7 @@ const RangeStyles = styled.div`
       content: "";
       width: 0;
       height: 14px;
-      border-left: 1px solid var(--inactive-color);
+      border-left: 1px solid var(--cw__inactive-color);
       position: absolute;
       top: 50%;
       left: 0;
@@ -101,7 +47,7 @@ const RangeStyles = styled.div`
     button {
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
-      color: var(--inactive-color);
+      color: var(--cw__inactive-color);
     }
   }
 `;

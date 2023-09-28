@@ -36,14 +36,14 @@ const DatePickerStyles = styled.div`
       border: none;
     }
     .components-button-group {
-      background-color: var(--background-color);
-      border-radius: var(--border-radius);
+      background-color: var(--cw__background-color);
+      border-radius: var(--cw__border-radius);
       padding: 6px;
       .components-button {
         font-size: 14px;
         line-height: 18.5px;
         padding: 4px 8px;
-        border-radius: var(--border-radius);
+        border-radius: var(--cw__border-radius);
         background: none;
         border: none;
         text-transform: uppercase;
@@ -51,8 +51,8 @@ const DatePickerStyles = styled.div`
         &.is-primary {
           font-weight: 600;
           background-color: #ffffff;
-          box-shadow: var(--box-shadow);
-          color: var(--secondary-color);
+          box-shadow: var(--cw__box-shadow);
+          color: var(--cw__secondary-color);
         }
       }
     }
@@ -68,20 +68,20 @@ const DatePickerStyles = styled.div`
   }
   .components-datetime__date {
     padding: 8px;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    border: 1px solid var(--cw__border-color);
+    border-radius: var(--cw__border-radius);
     .components-button {
       background: none;
       border: none;
       cursor: pointer;
       &:not(.components-datetime__date__day) {
-        color: var(--secondary-color);
+        color: var(--cw__secondary-color);
         svg {
           fill: currentColor;
         }
       }
       &[aria-label*="Selected"] {
-        background-color: var(--secondary-color);
+        background-color: var(--cw__secondary-color);
         color: #ffffff;
       }
     }

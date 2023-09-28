@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import ControlGroup from "../containers/ControlGroup";
 import { useState } from "@wordpress/element";
 import { UnitPicker } from "../components";
-import Icons from "./Icons";
+import Icons from "../assets/Icons";
 
 const SpacingInputStyles = styled.label`
   text-align: center;
@@ -32,8 +32,8 @@ const SpacingGroupStyles = styled.div`
   align-items: flex-start;
   gap: 0.5rem;
   .cw__spacing-button-wrapper {
-    background-color: var(--background-color);
-    border-radius: var(--border-radius);
+    background-color: var(--cw__background-color);
+    border-radius: var(--cw__border-radius);
     display: flex;
     height: 45px;
     flex: 1;
@@ -41,16 +41,16 @@ const SpacingGroupStyles = styled.div`
       background: none;
       border: none;
       cursor: pointer;
-      color: var(--inactive-color);
+      color: var(--cw__inactive-color);
       padding: 0.5rem;
       font-size: 13px;
-      border-radius: var(--border-radius);
+      border-radius: var(--cw__border-radius);
       display: inline-flex;
       align-items: center;
       justify-content: center;
       &:hover,
       &.active {
-        color: var(--secondary-color);
+        color: var(--cw__secondary-color);
       }
       &:focus {
         outline: 1px dotted;
@@ -65,7 +65,7 @@ const SpacingGroupStyles = styled.div`
         content: "";
         width: 0;
         height: 14px;
-        border-left: 1px solid var(--inactive-color);
+        border-left: 1px solid var(--cw__inactive-color);
         position: absolute;
         top: 50%;
         left: 0;

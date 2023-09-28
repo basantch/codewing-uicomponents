@@ -30,12 +30,12 @@ const SelectStyles = styled.div`
     content: "";
     width: 1rem;
     height: 1rem;
-    background-color: var(--inactive-color);
+    background-color: var(--cw__inactive-color);
     position: absolute;
     right: 0.5rem;
     top: 50%;
     transform: translateY(-50%);
-    transition: var(--transition);
+    transition: var(--cw__transition);
     mask: url("data:image/svg+xml,%3Csvg width='15' height='8' viewBox='0 0 15 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5177 1L7.5177 7L13.5177 1' stroke='%2393999F' stroke-width='2' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
     mask-size: 100%;
     mask-position: center;
@@ -54,11 +54,11 @@ const SelectStyles = styled.div`
     padding: 6px;
     margin: 6px 0 0;
     background-color: #ffffff;
-    border-radius: var(--border-radius);
+    border-radius: var(--cw__border-radius);
     box-shadow:
       0px 4px 6px -2px #10182808,
       0px 12px 16px -4px #10182814;
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--cw__border-color);
     padding-top: 0.5rem;
     position: absolute;
     top: 100%;
@@ -86,7 +86,7 @@ const SelectStyles = styled.div`
     li {
       padding: 10.5px 8px;
       cursor: default;
-      border-radius: var(--border-radius);
+      border-radius: var(--cw__border-radius);
       color: #2b3034;
       cursor: pointer;
       font-size: 14px;
@@ -97,12 +97,12 @@ const SelectStyles = styled.div`
         margin-bottom: 0.25rem;
       }
       &:hover {
-        color: var(--secondary-color);
+        color: var(--cw__secondary-color);
       }
       &.selected {
         font-weight: 600;
-        color: var(--secondary-color);
-        background-color: var(--background-color);
+        color: var(--cw__secondary-color);
+        background-color: var(--cw__background-color);
         background-image: url("data:image/svg+xml,%3Csvg width='21' height='20' viewBox='0 0 21 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M16.7021 5L7.53544 14.1667L3.36877 10' stroke='%23216BDB' stroke-width='1.66667' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
         background-size: 20px 20px;
         background-repeat: no-repeat;
@@ -122,17 +122,24 @@ const SelectStyles = styled.div`
       }
     }
   }
+  &.solid {
+    .cw__custom-select__input-wrapper {
+      border-color: transparent;
+      background-color: var(--cw__background-color);
+    }
+  }
   .cw__custom-select__input-wrapper {
     min-width: 100px;
     color: #2b3034;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    border: 1px solid var(--cw__border-color);
+    border-radius: var(--cw__border-radius);
     min-height: 44px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     padding: 10px;
     gap: 8px;
+    cursor: pointer;
     input.cw__custom-select__input {
       min-height: unset;
       padding: 0;
@@ -141,7 +148,7 @@ const SelectStyles = styled.div`
       border: none;
     }
     &:focus {
-      border-color: var(--secondary-color);
+      border-color: var(--cw__secondary-color);
     }
     .cw__custom-select__input-value {
       display: flex;
@@ -149,7 +156,7 @@ const SelectStyles = styled.div`
       gap: 8px;
     }
     .placeholder {
-      color: var(--inactive-color);
+      color: var(--cw__inactive-color);
     }
   }
   &.is-multiple {
@@ -171,7 +178,7 @@ const SelectedBadgeStyle = styled.span`
   color: #2b3034;
   padding: 6px 12px;
   background-color: #e5f0ff;
-  border-radius: var(--border-radius);
+  border-radius: var(--cw__border-radius);
   .cw__cancel {
     border: none;
     background: none;
@@ -209,6 +216,8 @@ const Select = ({
   isMultiple,
   isSearchable,
   placeholder,
+  variant,
+  style,
   ...ControlGroup
 }) => {
   const [selectOptions, setSelectOptions] = useState(options);
@@ -266,7 +275,7 @@ const Select = ({
       <SelectStyles
         className={`cw__custom-select${(open && " open") || ""}${
           isMultiple ? " is-multiple" : ""
-        }`}
+        } ${variant || ""}`}
       >
         <div
           tabIndex={0}
@@ -274,6 +283,7 @@ const Select = ({
           onKeyDown={handleOpenOnKeyDown}
           onClick={handleOpenOnKeyDown}
           ref={selectInput}
+          style={style}
         >
           {isMultiple &&
             value?.map((val, i) => {
@@ -288,7 +298,7 @@ const Select = ({
                 />
               );
             })}
-          {!isMultiple && (
+          {!isMultiple && value?.length > 0 && (
             <span className="cw__custom-select__input-value">
               {chosen?.icon}
               {chosen?.label}

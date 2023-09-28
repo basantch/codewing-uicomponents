@@ -1,7 +1,7 @@
 import styled from '@emotion/styled';
 import { FormFileUpload } from '@wordpress/components';
 import ControlGroup from '../containers/ControlGroup';
-import Icons from './Icons';
+import Icons from '../assets/Icons';
 
 const FileUploadStyle = styled.div`
     .components-button{
@@ -13,19 +13,19 @@ const FileUploadStyle = styled.div`
         line-height: 18.6px;
         padding: 10px 16px;
         border: none;
-        background-color: var(--background-color);
-        color: var(--secondary-color);
+        background-color: var(--cw__background-color);
+        color: var(--cw__secondary-color);
         gap: 8px;
         cursor: pointer;
-        border-radius: var(--border-radius);
-        transition: var(--transition);
+        border-radius: var(--cw__border-radius);
+        transition: var(--cw__transition);
         svg{
             font-size: 24px;
             width: 1em;
             height: 1em;
         }
         &:hover{
-            background-color: var(--secondary-color);
+            background-color: var(--cw__secondary-color);
             color: #ffffff;
         }
     }

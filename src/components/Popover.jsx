@@ -21,39 +21,39 @@ const PopoverStyle = styled.div`
   [data-placement^="top"] {
     > .tippy-arrow {
       &::before {
-        border-bottom-color: var(--border-color);
-        border-right-color: var(--border-color);
+        border-bottom-color: var(--cw__border-color);
+        border-right-color: var(--cw__border-color);
       }
     }
   }
   [data-placement^="bottom"] {
     > .tippy-arrow {
       &::before {
-        border-top-color: var(--border-color);
-        border-left-color: var(--border-color);
+        border-top-color: var(--cw__border-color);
+        border-left-color: var(--cw__border-color);
       }
     }
   }
   [data-placement^="left"] {
     > .tippy-arrow {
       &::before {
-        border-top-color: var(--border-color);
-        border-right-color: var(--border-color);
+        border-top-color: var(--cw__border-color);
+        border-right-color: var(--cw__border-color);
       }
     }
   }
   [data-placement^="right"] {
     > .tippy-arrow {
       &::before {
-        border-left-color: var(--border-color);
-        border-bottom-color: var(--border-color);
+        border-left-color: var(--cw__border-color);
+        border-bottom-color: var(--cw__border-color);
       }
     }
   }
   .cw_popover {
     background-color: #ffffff;
-    border: 1px solid var(--border-color);
-    border-radius: var(--border-radius);
+    border: 1px solid var(--cw__border-color);
+    border-radius: var(--cw__border-radius);
     padding: 12px;
     box-shadow:
       0px 4px 6px -2px #2b303408,

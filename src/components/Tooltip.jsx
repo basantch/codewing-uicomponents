@@ -5,7 +5,7 @@ const TooltipStyle = styled.div`
   display: inline-flex;
   cursor: pointer;
   &:hover {
-    color: var(--secondary-color);
+    color: var(--cw__secondary-color);
   }
   .wc__tooltip {
     display: block !important;

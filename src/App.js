@@ -1,6 +1,6 @@
 import "./styles.css";
 import { Global } from "@emotion/react";
-import styles from "./styles";
+import styles from "./assets/styles";
 import {
   GradientColorPicker,
   SelectButtonGroup,
@@ -20,8 +20,9 @@ import {
   BoxShadow,
   Typography,
 } from "./controls";
-import { useState, useEffect } from "@wordpress/element";
-import Icons from "./controls/Icons";
+import { useState, useEffect, useMemo } from "@wordpress/element";
+import Icons from "./assets/Icons";
+import Sort from "./Sort";
 
 const colorPalettes = [
   {
@@ -152,7 +153,7 @@ export default function App() {
   const [image, setImage] = useState("");
   const [date, setDate] = useState(false);
   const [number, setNumber] = useState(0);
-  const [palette, setPalette] = useState("Palette #1");
+  const [palette, setPalette] = useState(colorPalettes[0]);
   const [linkColor, setLinkColor] = useState({
     initial: "#2B3034",
     hover: "#216BDB",
@@ -228,31 +229,19 @@ export default function App() {
     decoration: "default",
   });
 
-  useEffect(() => {
-    setColor(
-      colorPalettes
-        .find((c) => c.name === palette)
-        .colors.find((n) => n.name === "Color 1").color,
-    );
+  useMemo(() => {
+    setColor(palette.colors.find((n) => n.name === "Color 1").color);
     setLinkColor({
-      initial: colorPalettes
-        .find((c) => c.name === palette)
-        .colors.find((n) => n.name === "Color 4").color,
-      hover: colorPalettes
-        .find((c) => c.name === palette)
-        .colors.find((n) => n.name === "Color 1").color,
+      initial: palette.colors.find((n) => n.name === "Color 4").color,
+      hover: palette.colors.find((n) => n.name === "Color 1").color,
     });
     setBorderStyle({
       ...borderStyle,
-      borderColor: colorPalettes
-        .find((c) => c.name === palette)
-        .colors.find((n) => n.name === "Color 2").color,
+      borderColor: palette.colors.find((n) => n.name === "Color 2").color,
     });
     setBoxShadow({
       ...boxShadow,
-      color: colorPalettes
-        .find((c) => c.name === palette)
-        .colors.find((n) => n.name === "Color 5").color,
+      color: palette.colors.find((n) => n.name === "Color 5").color,
     });
   }, [palette]);
 
@@ -296,6 +285,7 @@ export default function App() {
           onChange={setMultiSelectValue}
           description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
           isMultiple
+          isSearchable
         />
         <Text
           label="Text Input"
@@ -419,7 +409,9 @@ export default function App() {
           onChange={setPalette}
         />
         <SingleColorPicker
-          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          colorPalette={
+            colorPalettes.find((c) => c.name === palette.name)?.colors
+          }
           label="Color"
           divider="top"
           direction="horizontal"
@@ -439,14 +431,14 @@ export default function App() {
             {
               name: "initial",
               title: "Initial Color",
-              colorPalette: colorPalettes.find((c) => c.name === palette)
-                .colors,
+              colorPalette: colorPalettes.find((c) => c.name === palette.name)
+                ?.colors,
             },
             {
               name: "hover",
               title: "Hover Color",
-              colorPalette: colorPalettes.find((c) => c.name === palette)
-                .colors,
+              colorPalette: colorPalettes.find((c) => c.name === palette.name)
+                ?.colors,
             },
           ]}
           value={linkColor}
@@ -512,7 +504,7 @@ export default function App() {
           value={date}
           onChange={setDate}
           is12Hour={true}
-          // placeholder="Updated on"
+        // placeholder="Updated on"
         />
         <InputNumber
           label="Number of Posts"
@@ -528,12 +520,14 @@ export default function App() {
           divider="top"
           label="Border"
           direction="horizontal"
-          responsiveState={responsiveState}
-          setResponsiveState={setResponsiveState}
           value={borderStyle}
           onChange={setBorderStyle}
-          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          colorPalette={
+            colorPalettes.find((c) => c.name === palette.name)?.colors
+          }
           units={["px", "rem", "em", "pt", "vh", "vw"]}
+          responsiveState={responsiveState}
+          setResponsiveState={setResponsiveState}
         />
         <BoxShadow
           divider="top"
@@ -541,20 +535,25 @@ export default function App() {
           direction="horizontal"
           value={boxShadow}
           onChange={setBoxShadow}
-          colorPalette={colorPalettes.find((c) => c.name === palette).colors}
+          colorPalette={
+            colorPalettes.find((c) => c.name === palette.name)?.colors
+          }
           units={["px", "rem", "em", "pt", "vh", "vw"]}
         />
+      </div>
+      <div className="controls-wrapper">
         <Typography
-          divider="top"
+          divider="bottom"
           direction="horizontal"
           label="Typography"
           value={font}
           onChange={setFont}
           responsiveState={responsiveState}
           setResponsiveState={setResponsiveState}
-          fontFamilies={[]}
+          fontFamilies={[{ value: "default", label: "Default" }]}
           fontWeights={[{ value: "normal", label: "Normal" }]}
         />
+        <Sort />
       </div>
     </>
   );

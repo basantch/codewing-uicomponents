@@ -229,7 +229,7 @@ export default function App() {
     decoration: "default",
   });
 
-  useMemo(() => {
+  useEffect(() => {
     setColor(palette.colors.find((n) => n.name === "Color 1").color);
     setLinkColor({
       initial: palette.colors.find((n) => n.name === "Color 4").color,

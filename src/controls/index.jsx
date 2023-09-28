@@ -17,3 +17,4 @@ export { default as BoxShadow } from "./BoxShadow";
 export { default as Typography } from "./Typography";
 export {default as FeaturedImage} from "./FeaturedImage";
 export { default as Sortable } from "./sortable/Sortable";
+export { default as SortableItem } from "./sortable/SortableItem";

@@ -1,5 +1,5 @@
 import { useState } from "@wordpress/element";
-import { Sortable, FeaturedImage } from "./controls";
+import { Sortable, SortableItem, FeaturedImage } from "./controls";
 
 const Sort = () => {
   const [image, setImage] = useState({
@@ -13,37 +13,32 @@ const Sort = () => {
     [
       {
         id: 1,
-        component: <FeaturedImage
-          label="Featured Image"
-          direction="horizontal"
-          value={image}
-          onChange={setImage}
-        />
+        name: "Featured Image",
+        component: FeaturedImage,
+        state: image,
+        setState: (a) => setImage(a)
       },
       {
         id: 2,
-        component: <FeaturedImage
-          label="Featured Image 2"
-          direction="horizontal"
-          value={image}
-          onChange={setImage}
-        />
-      },
-      {
-        id: 3,
-        component: <FeaturedImage
-          label="Featured Image 3"
-          direction="horizontal"
-          value={image}
-          onChange={setImage}
-        />
+        name: "Featured Image",
+        component: FeaturedImage,
+        state: image,
+        setState: (a) => setImage(a)
       },
     ]
   );
 
-  console.log(items)
-
-  return <Sortable items={items} setItems={setItems} />
+  return <>
+    <Sortable items={items} setItems={setItems}>
+      {
+        items.map(({ id, name, component: Component, state, setState }) => {
+          return <SortableItem key={id} id={id}>
+            <Component label={name} direction="horizontal" value={state} onChange={setState} />
+          </SortableItem>
+        })
+      }
+    </Sortable>
+  </>
 };
 
 export default Sort;

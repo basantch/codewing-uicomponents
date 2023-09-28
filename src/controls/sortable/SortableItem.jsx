@@ -45,7 +45,7 @@ const SortableItemStyle = styled.div`
   }
 `
 
-export function SortableItem(props) {
+const SortableItem = (props) => {
     const {
         attributes,
         listeners,
@@ -70,3 +70,5 @@ export function SortableItem(props) {
         </SortableItemStyle>
     );
 }
+
+export default SortableItem;

@@ -5,44 +5,39 @@ import styled from '@emotion/styled';
 import Icons from '../../assets/Icons';
 
 const SortableItemStyle = styled.div`
-  border: 1px solid var(--cw__border-color);
-  border-radius: var(--cw__border-radius);
-  width: 100%;
-  position: relative;
-  padding: 12px;
-  padding-left: 34px;
-  background-color: #ffffff;
-  .wc__sort-button{
-    padding: 0;
-    background-color: transparent;
-    font-size: 0;
-    border: none;
-    width: 12px;
-    height: 20px;
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    cursor: move;
-    color: #42474B;
-    opacity: .5;
-    svg{
-        vertical-align: top;
-        width: 100%;
-        height: 100%;
+    width: 100%;
+    position: relative;
+    .wc__sort-button{
+        padding: 0;
+        background-color: transparent;
+        font-size: 0;
+        border: none;
+        width: 12px;
+        height: 20px;
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        cursor: move;
+        color: #42474B;
+        opacity: .5;
+        svg{
+            vertical-align: top;
+            width: 100%;
+            height: 100%;
+        }
+        &:hover{
+            color: var(--cw__secondary-color);
+            opacity: 1;
+        }
     }
-    // &[aria-pressed=true]{
-    //     cursor: grabbing;
-    // }
-    &:hover{
-        color: var(--cw__secondary-color);
-        opacity: 1;
+    > .cw__control-item{
+        border: 1px solid var(--cw__border-color);
+        border-radius: var(--cw__border-radius);
+        padding: 12px;
+        padding-left: 34px;
+        background-color: #ffffff;
     }
-  }
-  > .cw__control-item{
-    padding: 0;
-    border: none !important;
-  }
 `
 
 const SortableItem = (props) => {

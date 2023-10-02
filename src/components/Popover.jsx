@@ -69,9 +69,27 @@ const PopoverStyle = styled.div`
     }
     .cw__control-item {
       margin-bottom: 8px;
+      padding: 0 12px;
+      margin-left: -12px;
+      margin-right: -12px;
+      &:first-of-type{
+        padding-top: 0;
+      }
+      &:first-of-type{
+        padding-bottom: 0;
+      }
       &:last-child {
         margin-bottom: 0;
       }
+      &.cw__divider-top{
+        padding-top: 12px;
+      }
+      &.cw__divider-bottom{
+        padding-bottom: 12px;
+      }
+    }
+    .cw__control-title{
+      margin: -8px -12px 8px;
     }
   }
 `;

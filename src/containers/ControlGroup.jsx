@@ -107,9 +107,9 @@ const ControlItemStyles = styled.div`
     align-items: center;
     justify-content: space-between;
     column-gap: 8px;
-    > section {
-      max-width: 150px;
-    }
+    // > section {
+    //   max-width: 150px;
+    // }
     .cw__custom-select {
       .cw__select-dropdown {
         left: auto;

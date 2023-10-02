@@ -56,7 +56,7 @@ const RangeSlider = ({ units, value, onChange, ...ControlGroup }) => {
   return (
     <RangeStyles className={units || value?.unit ? "cw__has-unit" : ""}>
       <RangeControl
-        value={value.value}
+        value={+value.value}
         onChange={(val) => onChange({ ...value, value: val })}
         {...ControlGroup}
       />

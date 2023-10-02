@@ -400,6 +400,42 @@ const Icons = {
         </clipPath>
       </defs>
     </svg>
+  ),
+  dot: (
+    <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_724_5659)">
+        <path d="M3.86535 0.538818C2.94729 0.538818 2.06683 0.903516 1.41767 1.55268C0.768506 2.20184 0.403809 3.0823 0.403809 4.00036C0.403809 4.91841 0.768506 5.79887 1.41767 6.44803C2.06683 7.0972 2.94729 7.4619 3.86535 7.4619C5.7865 7.4619 7.32689 5.92151 7.32689 4.00036C7.32689 3.0823 6.96219 2.20184 6.31302 1.55268C5.66386 0.903516 4.7834 0.538818 3.86535 0.538818Z" fill="currentColor" />
+      </g>
+      <defs>
+        <clipPath id="clip0_724_5659">
+          <rect width="6.92308" height="6.92308" fill="white" transform="translate(0.403809 0.538818)" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  pipe: (
+    <svg width="4" height="14" viewBox="0 0 4 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_724_5665)">
+        <path d="M1.86536 12.7689V1.23047" stroke="currentColor" strokeWidth="1.38462" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      <defs>
+        <clipPath id="clip0_724_5665">
+          <rect width="2.30769" height="13.8462" fill="white" transform="translate(0.711548 0.0769043)" />
+        </clipPath>
+      </defs>
+    </svg>
+  ),
+  slash: (
+    <svg width="11" height="14" viewBox="0 0 11 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g clipPath="url(#clip0_724_5668)">
+        <path d="M9.6923 0.942139L1.03845 13.0575" stroke="currentColor" strokeWidth="1.38462" strokeLinecap="round" strokeLinejoin="round" />
+      </g>
+      <defs>
+        <clipPath id="clip0_724_5668">
+          <rect width="10.3846" height="13.8462" fill="white" transform="translate(0.173096 0.0769043)" />
+        </clipPath>
+      </defs>
+    </svg>
   )
 };
 

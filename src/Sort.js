@@ -1,7 +1,9 @@
 import { useState } from "@wordpress/element";
-import { Sortable, SortableItem, FeaturedImage } from "./controls";
+import { Sortable, SortableItem, FeaturedImage, Categories, Title, PostMeta } from "./controls";
 
 const Sort = () => {
+
+  const [cat, setCat] = useState({ separator: "dash" })
 
   const [items, setItems] = useState(
     [
@@ -18,13 +20,36 @@ const Sort = () => {
       },
       {
         id: 2,
-        name: "Featured Image 2",
-        component: FeaturedImage,
+        name: "Categories",
+        component: Categories,
         value: {
-          ratio: "original",
-          scale: "default",
-          size: "default",
-          visibility: ["desktop"],
+          separator: "dash"
+        }
+      },
+      {
+        id: 3,
+        name: "Title",
+        component: Title,
+        value: {
+          headingTag: "h2",
+          fontSize: {
+            value: "48",
+            unit: "px"
+          }
+        }
+      },
+      {
+        id: 4,
+        name: "Post Meta",
+        component: PostMeta,
+        value: {
+          query: ["author", "published-date", "comments"],
+          separator: "dot",
+          authorLabel: "By",
+          showAvatar: false,
+          wordsPerMinute: 4,
+          showUpdatedDateLabel: false,
+          updatedDateLabel: ""
         }
       },
     ]

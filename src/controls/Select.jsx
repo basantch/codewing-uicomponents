@@ -26,6 +26,7 @@ const Icons = {
 const SelectStyles = styled.div`
   position: relative;
   font-size: 14px;
+  min-width: 136px;
   &::after {
     content: "";
     width: 1rem;

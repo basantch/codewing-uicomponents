@@ -19,6 +19,7 @@ import {
   Border,
   BoxShadow,
   Typography,
+  Ratio,
 } from "./controls";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import Icons from "./assets/Icons";
@@ -228,6 +229,8 @@ export default function App() {
     transform: "default",
     decoration: "default",
   });
+
+  const [imageRatio, setImageRatio] = useState({ratioType: "predefined", ratio: "1:1", size: "300"});
 
   useEffect(() => {
     setColor(palette.colors.find((n) => n.name === "Color 1").color);
@@ -554,6 +557,13 @@ export default function App() {
           fontWeights={[{ value: "normal", label: "Normal" }]}
         />
         <Sort />
+        <Ratio
+          label="Image Ratio"
+          direction="horizontal"
+          divider="top"
+          value={imageRatio}
+          onChange={setImageRatio}
+        />
       </div>
     </>
   );

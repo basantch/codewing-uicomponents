@@ -87,6 +87,14 @@ const PopoverStyle = styled.div`
       &.cw__divider-bottom{
         padding-bottom: 12px;
       }
+      &:not(.horizontal){
+        > header{
+          margin: 0 0 8px;
+        }
+        .cw__control-description{
+          margin: 8px 0;
+        }
+      }
     }
     .cw__control-title{
       margin: -8px -12px 8px;

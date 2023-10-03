@@ -1,5 +1,5 @@
 import { useState } from "@wordpress/element";
-import { Sortable, SortableItem, FeaturedImage, Categories, Title, PostMeta } from "./controls";
+import { Sortable, SortableItem, FeaturedImage, Categories, Title, PostMeta, Excerpt, Divider, ReadMoreButton } from "./controls";
 
 const Sort = () => {
 
@@ -52,6 +52,40 @@ const Sort = () => {
           updatedDateLabel: ""
         }
       },
+      {
+        id: 5,
+        name: "Excerpt",
+        component: Excerpt,
+        value: {
+          postContent: "excerpt",
+          length: 4
+        }
+      },
+      {
+        id: 6,
+        name: "Divider",
+        component: Divider,
+        value: {
+          margin: {
+            top: 32,
+            right: 32,
+            bottom: 32,
+            left: 32,
+            unit: "px"
+          }
+        },
+        units: ["px", "em", "rem"]
+      },
+      {
+        id: 7,
+        name: "Read More Button",
+        component: ReadMoreButton,
+        value: {
+          type: "button",
+          buttonLabel: "Read More",
+          showArrow: false
+        },
+      },
     ]
   );
 
@@ -70,9 +104,9 @@ const Sort = () => {
   return <>
     <Sortable items={items} setItems={setItems}>
       {
-        items.map(({ id, name, component: Component, value }) => {
+        items.map(({ id, name, component: Component, value, ...rest }) => {
           return <SortableItem key={id} id={id}>
-            <Component label={name} direction="horizontal" value={value} onChange={(val) => handleOnChange(id, val)} />
+            <Component label={name} direction="horizontal" value={value} onChange={(val) => handleOnChange(id, val)} {...rest} />
           </SortableItem>
         })
       }

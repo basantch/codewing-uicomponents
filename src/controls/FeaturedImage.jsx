@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { Select } from ".";
+import { Select, Text } from ".";
 import { Popover, PopoverButton } from "../components";
 import ControlGroup from "../containers/ControlGroup";
 import Icons from "../assets/Icons";
@@ -14,8 +14,27 @@ const PopoverStyle = styled.div`
   }
 `;
 
+const CustomWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    .cw__control-item{
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+`
+
+const CustomRatio = ({ value, onChange, ...rest }) => {
+    const [firstVal, secondVal] = value.split(":");
+    return <CustomWrapper className="cw__custom-wrapper cw__control-item">
+        <Text type="number" value={firstVal} onChange={f => onChange(`${f}:${secondVal}`)} {...rest} />
+        <span>:</span>
+        <Text type="number" value={secondVal} onChange={s => onChange(`${firstVal}:${s}`)} {...rest} />
+    </CustomWrapper>
+}
+
 const PopoverContent = ({ value, onChange }) => {
-  const { ratio, scale, size, visibility } = value;
+  const { ratio, scale, size, visibility, customRatio } = value;
   return (
     <PopoverStyle>
       <Select
@@ -27,8 +46,32 @@ const PopoverContent = ({ value, onChange }) => {
             label: "Original",
           },
           {
-            value: "predefined",
-            label: "Predefined",
+            value: "1:1",
+            label: "Square - 1:1",
+          },
+          {
+            value: "4:3",
+            label: "Standard - 4:3",
+          },
+          {
+            value: "3:4",
+            label: "Portrait - 3:4",
+          },
+          {
+            value: "3:2",
+            label: "Classic - 3:2",
+          },
+          {
+            value: "2:3",
+            label: "Classic Portrait - 2:3",
+          },
+          {
+            value: "16:9",
+            label: "Wide - 16:9",
+          },
+          {
+            value: "9:16",
+            label: "Tall - 9:16",
           },
           {
             value: "custom",
@@ -41,7 +84,8 @@ const PopoverContent = ({ value, onChange }) => {
         style={{ width: "136px" }}
         variant="solid"
       />
-      <Select
+      {ratio === "custom" && <CustomRatio value={customRatio || "1:1"} onChange={r => onChange({ ...value, customRatio: r })} />}
+      {ratio !== "original" && <Select
         label="Image Scale"
         direction="horizontal"
         options={[
@@ -57,7 +101,7 @@ const PopoverContent = ({ value, onChange }) => {
         isChildren
         style={{ width: "136px" }}
         variant="solid"
-      />
+      />}
       <Select
         label="Image Size"
         direction="horizontal"

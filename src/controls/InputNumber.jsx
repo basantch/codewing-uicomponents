@@ -52,9 +52,9 @@ const InputNumber = ({value, min, max, onChange, step, ...ControlGroup}) => {
         <button disabled={min >= value} type="button" onClick={handleDecrease}>
             {Icons.minus}
         </button>
-        <input 
+        <input
             type="number"
-            value={value} 
+            value={+value}
             onChange={(e) => onChange(e.target.value)}
             min={min}
             max={max}

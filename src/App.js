@@ -24,6 +24,7 @@ import {
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import Icons from "./assets/Icons";
 import Sort from "./Sort";
+import { FocalPointPicker } from "@wordpress/components";
 
 const colorPalettes = [
   {
@@ -230,7 +231,20 @@ export default function App() {
     decoration: "default",
   });
 
-  const [imageRatio, setImageRatio] = useState({ratioType: "predefined", ratio: "1:1", size: "300"});
+  const [imageRatio, setImageRatio] = useState({ ratioType: "predefined", ratio: "1:1", size: "300" });
+
+  const [focalPoint, setFocalPoint] = useState({
+    x: 0.5,
+    y: 0.5,
+  });
+
+  const [url, setUrl] = useState(false)
+
+  /* Example function to render the CSS styles based on Focal Point Picker value */
+  const style = {
+    backgroundImage: `url(${url})`,
+    backgroundPosition: `${focalPoint.x * 100}% ${focalPoint.y * 100}%`,
+  };
 
   useEffect(() => {
     setColor(palette.colors.find((n) => n.name === "Color 1").color);
@@ -248,13 +262,15 @@ export default function App() {
     });
   }, [palette]);
 
+  console.debug(url)
+
   return (
     <>
       <div style={{ width: "100%", textAlign: "center" }}>
         <h3>Codewing UI Components</h3>
       </div>
       <div className="controls-wrapper">
-        <Global styles={styles} />
+        {/* <Global styles={styles} /> */}
         <Select
           help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
           label="Select Input"
@@ -564,6 +580,15 @@ export default function App() {
           value={imageRatio}
           onChange={setImageRatio}
         />
+        <input type="file" onChange={e => setUrl(e.target.value)} />
+        <FocalPointPicker
+          url={url}
+          value={focalPoint}
+          onDragStart={setFocalPoint}
+          onDrag={setFocalPoint}
+          onChange={setFocalPoint}
+        />
+        <div style={style} />
       </div>
     </>
   );

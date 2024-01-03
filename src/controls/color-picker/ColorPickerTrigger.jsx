@@ -7,8 +7,8 @@ const ColorPickerStyles = styled.div`
   }
   .cw__color-picker-color-block {
     display: inline-block;
-    width: 32px;
-    height: 32px;
+    width: 24px;
+    height: 24px;
     border-radius: 50%;
     background-color: #000000;
     border: 1px solid #efefef;

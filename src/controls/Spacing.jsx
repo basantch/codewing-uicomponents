@@ -7,7 +7,6 @@ import Icons from "../assets/Icons";
 const SpacingInputStyles = styled.label`
   text-align: center;
   flex: 1;
-  max-width: 44px;
   input[type="number"] {
     text-align: center;
     padding-left: 0.25rem;
@@ -92,12 +91,13 @@ const SapcingInput = ({ label, ...rest }) => {
   );
 };
 
-const Spacing = ({ onChange, value, units, ...ControlGroup }) => {
+const Spacing = ({ onChange, value, units, max, min, ...ControlGroup }) => {
   const [locked, setLocked] = useState(false);
 
   const handleOnChange = (e) => {
+    const val = e.target.value
     const key = e.target.name;
-    const _value = e.target.value;
+    const _value = val >= max ? max : val <= min ? min : val;
     if (locked) {
       onChange({
         ...value,

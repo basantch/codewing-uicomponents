@@ -19,7 +19,7 @@ const SortableWrapper = styled.div`
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  padding: 16px;
+  padding: 16px 0;
 `
 
 const Sortable = ({ items, setItems, children }) => {

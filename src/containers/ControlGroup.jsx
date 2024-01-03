@@ -5,12 +5,15 @@ import Icons from "../assets/Icons";
 import "tippy.js/dist/tippy.css";
 import "tippy.js/animations/scale.css";
 import "tippy.js/animations/shift-away.css";
+import "../assets/styles.scss";
 
 const ControlItemStyles = styled.div`
   color: var(--cw__primary-color);
-  padding: 16px;
+  padding: 16px 0;
+  width: 100%;
   .cw__control-item {
     padding: 0;
+    width: unset;
   }
   &.cw__divider-top {
     border-top: 1px solid var(--cw__background-color);

@@ -28,7 +28,6 @@ const SelectButtonStyles = styled.label`
   .cw__icon {
     display: flex;
     svg {
-      width: 1em;
       height: 1em;
       vertical-align: -0.12em;
     }
@@ -65,6 +64,9 @@ const SelectButtonGroupStyles = styled.div`
   }
   .cw__select-button {
     width: 100%;
+    &:hover{
+      background-color: #ffffff;
+    }
     &.cw__select-button-checked {
       background-color: #ffffff;
       color: var(--cw__secondary-color);

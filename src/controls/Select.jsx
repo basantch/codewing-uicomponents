@@ -1,7 +1,8 @@
 import ControlGroup from "../containers/ControlGroup";
 import { useState, useRef, useEffect } from "@wordpress/element";
-import OutsideClickHandler from "react-outside-click-handler";
 import styled from "@emotion/styled";
+import Tippy from "@tippyjs/react";
+import { __ } from '@wordpress/i18n';
 
 const Icons = {
   close: (
@@ -24,49 +25,62 @@ const Icons = {
 };
 
 const SelectStyles = styled.div`
-  position: relative;
-  font-size: 14px;
-  min-width: 136px;
-  &::after {
-    content: "";
-    width: 1rem;
-    height: 1rem;
-    background-color: var(--cw__inactive-color);
-    position: absolute;
-    right: 0.5rem;
-    top: 50%;
-    transform: translateY(-50%);
-    transition: var(--cw__transition);
-    mask: url("data:image/svg+xml,%3Csvg width='15' height='8' viewBox='0 0 15 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5177 1L7.5177 7L13.5177 1' stroke='%2393999F' stroke-width='2' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
-    mask-size: 100%;
-    mask-position: center;
-    mask-repeat: no-repeat;
+	position: relative;
+	font-size: 14px;
+	min-width: 136px;
+	[data-tippy-root]{
+		width: 100%;
+	}
+	.tippy-box{
+		background: none;
+	}
+	.tippy-content{
+		padding: 6px;
+		background-color: #ffffff;
+		border-radius: var(--cw__border-radius);
+		box-shadow:
+		  0px 4px 6px -2px #10182808,
+		  0px 12px 16px -4px #10182814;
+		border: 1px solid var(--cw__border-color);
+		padding-top: 0.5rem;
+		min-width: 100%;
+	}
+  .cw__custom-select__input-wrapper{
+	  &::after {
+		content: "";
+		width: 1rem;
+		height: 1rem;
+		background-color: var(--cw__inactive-color);
+		position: absolute;
+		right: 0.5rem;
+		top: 50%;
+		transform: translateY(-50%);
+		transition: var(--cw__transition);
+		mask: url("data:image/svg+xml,%3Csvg width='15' height='8' viewBox='0 0 15 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5177 1L7.5177 7L13.5177 1' stroke='%2393999F' stroke-width='2' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
+		mask-size: 100%;
+		mask-position: center;
+		mask-repeat: no-repeat;
+	  }
   }
-  &.open {
-    &::after {
-      transform: translateY(-50%) rotate(180deg);
-    }
+  &.is-multiple {
+	.cw__custom-select__input-wrapper{
+		&::after {
+		  content: none;
+		}
+	}
+  }
+  .open {
+	.cw__custom-select__input-wrapper{
+		&::after {
+		  transform: translateY(-50%) rotate(180deg);
+		}
+	}
   }
   .cw__select-input {
     padding-right: 2rem;
     cursor: default;
   }
   .cw__select-dropdown {
-    padding: 6px;
-    margin: 6px 0 0;
-    background-color: #ffffff;
-    border-radius: var(--cw__border-radius);
-    box-shadow:
-      0px 4px 6px -2px #10182808,
-      0px 12px 16px -4px #10182814;
-    border: 1px solid var(--cw__border-color);
-    padding-top: 0.5rem;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 100%;
-    z-index: 1;
-    animation: fadeInDown 0.2s ease;
     input[type="search"] {
       margin: 0 0 8px;
     }
@@ -94,8 +108,9 @@ const SelectStyles = styled.div`
       display: flex;
       align-items: center;
       gap: 8px;
-      &:not(:last-child) {
-        margin-bottom: 0.25rem;
+	  margin-bottom: 0.25rem;
+      &:last-child {
+		margin-bottom: 0;
       }
       &:hover {
         color: var(--cw__secondary-color);
@@ -160,11 +175,6 @@ const SelectStyles = styled.div`
       color: var(--cw__inactive-color);
     }
   }
-  &.is-multiple {
-    &::after {
-      content: none;
-    }
-  }
   &:not(.is-multiple) {
     .cw__custom-select__input-wrapper {
       padding-right: 32px;
@@ -187,6 +197,38 @@ const SelectedBadgeStyle = styled.span`
     cursor: pointer;
   }
 `;
+
+const SelectOptions = ({ value, options, isSearchable, onSelect, onSearch }) => {
+  return <div className="cw__select-dropdown">
+    {isSearchable && (
+      <input
+        type="search"
+        placeholder={__('Search...', 'Rishi')}
+        onChange={onSearch}
+      />
+    )}
+    {options.length <= 0 && (
+      <span className="cw__404-text">There are no options!</span>
+    )}
+    <ul className="cw__select-options">
+      {options?.map(({ value: _value, label, icon }, i) => {
+        const selected = value == _value;
+        return (
+          <li
+            key={i}
+            tabIndex={0}
+            className={selected ? "selected" : ""}
+            onClick={onSelect(_value)}
+            onKeyDown={onSelect(_value)}
+          >
+            {icon && <i className="icon">{icon}</i>}
+            <span className="text">{label}</span>
+          </li>
+        );
+      })}
+    </ul>
+  </div>
+}
 
 const SelectedBadge = ({ text, onCancel }) => {
   return (
@@ -212,6 +254,7 @@ const removeItems = (a, b) => {
 
 const Select = ({
   onChange,
+  onCancelClick,
   options,
   value,
   isMultiple,
@@ -219,25 +262,17 @@ const Select = ({
   placeholder,
   variant,
   style,
-  ...ControlGroup
 }) => {
-  const [selectOptions, setSelectOptions] = useState(options);
-  const [open, setOpen] = useState(false);
+  const [selectOptions, setSelectOptions] = useState(false);
   const selectInput = useRef(null);
-  const chosen = options?.find((a) => a.value === value);
+  const chosen = options?.find((a) => a.value == value);
+  const _options = selectOptions || options;
 
   useEffect(() => {
     if (isMultiple) {
       setSelectOptions(removeItems(options, value));
     }
   }, [value]);
-
-  const escape = (e) => {
-    if (e.type === "keydown" && e.key === "Escape") {
-      setOpen(false);
-      selectInput.current.focus();
-    }
-  };
 
   const handleSelectOnKeyDown = (_value) => (e) => {
     if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
@@ -252,96 +287,71 @@ const Select = ({
     }
   };
 
-  const handleOpenOnKeyDown = (e) => {
-    if (e.type === "click" || (e.type === "keydown" && e.key === "Enter")) {
-      setOpen(true);
-      selectInput.current.focus();
-    }
-    escape(e);
-  };
-
   const handleOnSearch = (e) => {
     const keywords = e.target.value.toLowerCase();
     setSelectOptions(
       isMultiple
         ? removeItems(options, value).filter((f) =>
-            f.label.toLowerCase().startsWith(keywords),
-          )
-        : options.filter((f) => f.label.toLowerCase().startsWith(keywords)),
+          f.label.toLowerCase().match(keywords),
+        )
+        : options.filter((f) => f.value.toLowerCase().split("-").join(" ").match(keywords)),
     );
   };
 
   return (
-    <OutsideClickHandler onOutsideClick={() => setOpen(false)}>
-      <SelectStyles
-        className={`cw__custom-select${(open && " open") || ""}${
-          isMultiple ? " is-multiple" : ""
-        } ${variant || ""}`}
+    <SelectStyles className={`${isMultiple ? " is-multiple" : ""} ${variant || ""}`}>
+      <Tippy
+        content={
+          <SelectOptions
+            value={value}
+            isSearchable={isSearchable}
+            options={_options}
+            onSelect={handleSelectOnKeyDown}
+            onSearch={handleOnSearch}
+          />
+        }
+        trigger="click"
+        arrow={false}
+        interactive
       >
         <div
-          tabIndex={0}
-          className="cw__custom-select__input-wrapper"
-          onKeyDown={handleOpenOnKeyDown}
-          onClick={handleOpenOnKeyDown}
-          ref={selectInput}
-          style={style}
+          className={`cw__custom-select`}
         >
-          {isMultiple &&
-            value?.map((val, i) => {
-              const _selectedValue = options?.find(
-                (a) => a.value === val,
-              )?.label;
-              return (
-                <SelectedBadge
-                  key={i}
-                  text={_selectedValue}
-                  onCancel={() => onChange(value?.filter((a) => a !== val))}
-                />
-              );
-            })}
-          {!isMultiple && value?.length > 0 && (
-            <span className="cw__custom-select__input-value">
-              {chosen?.icon}
-              {chosen?.label}
-            </span>
-          )}
-          {placeholder && value?.length <= 0 && (
-            <span className="placeholder">{placeholder}</span>
-          )}
-        </div>
-        {selectOptions && open && (
-          <div className="cw__select-dropdown">
-            {isSearchable && (
-              <input
-                type="search"
-                placeholder="Search..."
-                onChange={handleOnSearch}
-              />
-            )}
-            {selectOptions.length <= 0 && (
-              <span className="cw__404-text">There is no options!</span>
-            )}
-            <ul className="cw__select-options">
-              {selectOptions?.map(({ value: _value, label, icon }, i) => {
-                const selected = value?.includes(_value);
+          <div
+            tabIndex={0}
+            className="cw__custom-select__input-wrapper"
+            ref={selectInput}
+            style={style}
+          >
+            {isMultiple &&
+              value?.map((val, i) => {
+                const _selectedValue = options?.find(
+                  (a) => a.value === val,
+                )?.label;
                 return (
-                  <li
+                  <SelectedBadge
                     key={i}
-                    tabIndex={0}
-                    className={selected ? "selected" : ""}
-                    onClick={handleSelectOnKeyDown(_value)}
-                    onKeyDown={handleSelectOnKeyDown(_value)}
-                  >
-                    {icon && <i className="icon">{icon}</i>}
-                    <span className="text">{label}</span>
-                  </li>
+                    text={_selectedValue}
+                    onCancel={() => {
+                      onCancelClick ? onCancelClick(val) : onChange(value?.filter((a) => a !== val))
+                    }}
+                  />
                 );
-              })}
-            </ul>
+              })
+            }
+            {!isMultiple && (
+              <span className="cw__custom-select__input-value">
+                {chosen?.icon}
+                {chosen?.label}
+              </span>
+            )}
+            {placeholder && value?.length <= 0 && (
+              <span className="placeholder">{placeholder || "Select"}</span>
+            )}
           </div>
-        )}
-      </SelectStyles>
-    </OutsideClickHandler>
+        </div>
+      </Tippy>
+    </SelectStyles>
   );
 };
 

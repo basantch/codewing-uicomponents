@@ -20,6 +20,7 @@ import {
   BoxShadow,
   Typography,
   Ratio,
+  Background,
 } from "./controls";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import Icons from "./assets/Icons";
@@ -239,6 +240,8 @@ export default function App() {
   });
 
   const [url, setUrl] = useState(false)
+
+  const [background, setBackground] = useState({});
 
   /* Example function to render the CSS styles based on Focal Point Picker value */
   const style = {
@@ -576,11 +579,18 @@ export default function App() {
         <Ratio
           label="Image Ratio"
           direction="horizontal"
-          divider="top"
+          // divider="top"
           value={imageRatio}
           onChange={setImageRatio}
+          divider="bottom:top"
         />
-        <input type="file" onChange={e => setUrl(e.target.value)} />
+        <Background
+          label="Background"
+          direction="horizontal"
+          divider="bottom"
+          value={background}
+          onChange={setBackground}
+        />
         <FocalPointPicker
           url={url}
           value={focalPoint}

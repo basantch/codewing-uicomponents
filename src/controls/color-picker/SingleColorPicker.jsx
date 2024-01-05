@@ -10,9 +10,9 @@ const ColorPickerHeader = styled.header`
   margin: 0 -4px 13px;
 `;
 
-const SingleColorPicker = ({ colorPalette, value, title, ...ControlGroup }) => {
+const SingleColorPicker = ({ colorPalette, value, title, interactive, ...ControlGroup }) => {
   return (
-    <ColorPickerTrigger color={value} title={title}>
+    <ColorPickerTrigger color={value} title={title} interactive={interactive}>
       {colorPalette && (
         <ColorPickerHeader>
           <ColorPalette

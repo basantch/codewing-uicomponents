@@ -1,6 +1,6 @@
 import Tippy from "@tippyjs/react";
 
-export default ({ content, children, className, ...rest }) => {
+export default ({ content, children, className, interactive, ...rest }) => {
   const cls = `cw_popover ${className}`;
   return (
     <Tippy
@@ -10,11 +10,10 @@ export default ({ content, children, className, ...rest }) => {
       theme="light"
       disabled={!content}
       animation="shift-away"
-      // animateFill={true}
       interactive
       allowHTML
       arrow
-      appendTo={document.body}
+      {...(!interactive ? { appendTo: document.body } : {})}
       {...rest}
     >
       <div>{children}</div>

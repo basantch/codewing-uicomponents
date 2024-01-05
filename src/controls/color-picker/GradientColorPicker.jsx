@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { GradientPicker } from "@wordpress/components";
-import { useState } from "@wordpress/element";
 import ControlGroup from "../../containers/ControlGroup";
 import ColorPickerTrigger from "./ColorPickerTrigger";
 
@@ -35,9 +34,9 @@ const GradientPickerStyles = styled.div`
   }
 `;
 
-const GradientColorPicker = ({ value, title, ...ControlGroup }) => {
+const GradientColorPicker = ({ value, title, interactive, ...ControlGroup }) => {
   return (
-    <ColorPickerTrigger color={value} title={title}>
+    <ColorPickerTrigger color={value} title={title} interactive={interactive}>
       <GradientPickerStyles>
         <div className="cw__components-color-picker">
           <GradientPicker

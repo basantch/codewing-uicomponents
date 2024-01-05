@@ -338,10 +338,10 @@ const styles = css`
       &:last-child {
         margin-bottom: 0;
       }
-      &.cw__divider-top{
+      &[data-divider*="top"]{
         padding-top: 12px;
       }
-      &.cw__divider-bottom{
+      &[data-divider*="bottom"]{
         padding-bottom: 12px;
       }
       &:not(.horizontal){

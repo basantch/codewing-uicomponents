@@ -17,12 +17,15 @@ const PopoverButtonStyle = styled.button`
   svg{
     vertical-align: top;
   }
+  &+button{
+    margin-left: 8px;
+  }
 `;
 
-const PopoverButton = ({ changed }) => {
+const PopoverButton = ({ changed, children, ...rest }) => {
   return (
-    <PopoverButtonStyle type="button" className={changed === 1 ? "changed" : ""}>
-      {Icons.pen}
+    <PopoverButtonStyle type="button" className={changed === 1 ? "changed" : ""} {...rest}>
+      {children || Icons.pen}
     </PopoverButtonStyle>
   );
 };

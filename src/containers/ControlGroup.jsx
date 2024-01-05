@@ -15,11 +15,11 @@ const ControlItemStyles = styled.div`
     padding: 0;
     width: unset;
   }
-  &.cw__divider-top {
+  &[data-divider*="top"] {
     border-top: 1px solid var(--cw__background-color);
     padding-top: 16px;
   }
-  &.cw__divider-bottom {
+  &[data-divider*="bottom"] {
     border-bottom: 1px solid var(--cw__background-color);
     padding-bottom: 16px;
   }
@@ -240,8 +240,9 @@ const ControlGroup =
 
       return (
         <ControlItemStyles
-          className={`cw__control-item ${direction || ""}${border}`}
+          className={`cw__control-item ${direction || ""}`}
           data-visibility={visibility ? "hidden" : false}
+          data-divider={divider}
         >
           {label && (
             <header>

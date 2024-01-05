@@ -16,7 +16,7 @@ const Icons = {
       />
       <path
         d="M8 21H16"
-        stroke="black"
+        stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -436,6 +436,56 @@ const Icons = {
         </clipPath>
       </defs>
     </svg>
+  ),
+  brush: (
+    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g mask="url(#mask0_2471_2065)">
+        <path d="M6.5177 21C5.7677 21 5.02603 20.8167 4.2927 20.45C3.55937 20.0833 2.9677 19.6 2.5177 19C2.95103 19 3.3927 18.8292 3.8427 18.4875C4.2927 18.1458 4.5177 17.65 4.5177 17C4.5177 16.1667 4.80937 15.4583 5.3927 14.875C5.97603 14.2917 6.68437 14 7.5177 14C8.35103 14 9.05937 14.2917 9.6427 14.875C10.226 15.4583 10.5177 16.1667 10.5177 17C10.5177 18.1 10.126 19.0417 9.3427 19.825C8.55937 20.6083 7.6177 21 6.5177 21ZM12.2677 15L9.5177 12.25L18.4677 3.29999C18.651 3.11666 18.8802 3.02083 19.1552 3.01249C19.4302 3.00416 19.6677 3.09999 19.8677 3.29999L21.2177 4.64999C21.4177 4.84999 21.5177 5.08333 21.5177 5.34999C21.5177 5.61666 21.4177 5.84999 21.2177 6.04999L12.2677 15Z" fill="currentColor" />
+      </g>
+    </svg>
+  ),
+  gradient: (
+    <svg width="25" height="24" viewBox="0 0 25 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g mask="url(#mask0_2471_2070)">
+        <path d="M3.5177 3V21H21.5177V3H3.5177ZM10.1844 19.6667H9.85103V4.33333H10.1844V19.6667ZM12.1844 19.6667H11.5177V4.33333H12.1844V19.6667ZM14.1844 19.6667H13.1844V4.33333H14.1844V19.6667ZM16.1844 19.6667H14.851V4.33333H16.1844V19.6667ZM20.1844 19.6667H16.5177V4.33333H20.1844V19.6667Z" fill="currentColor" />
+      </g>
+    </svg>
+  ),
+  'no-repeat': (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M14 11.5C14 12.8807 12.8807 14 11.5 14C10.1193 14 9 12.8807 9 11.5C9 10.1193 10.1193 9 11.5 9C12.8807 9 14 10.1193 14 11.5Z" fill="currentColor" />
+    </svg>
+
+  ),
+  'repeat-x': (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="4.5" cy="11.5" r="2.5" fill="currentColor" />
+      <circle cx="11.5" cy="11.5" r="2.5" fill="currentColor" />
+      <circle cx="18.5" cy="11.5" r="2.5" fill="currentColor" />
+    </svg>
+
+  ),
+  'repeat-y': (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="11.5" cy="4.5" r="2.5" transform="rotate(90 11.5 4.5)" fill="currentColor" />
+      <circle cx="11.5" cy="11.5" r="2.5" transform="rotate(90 11.5 11.5)" fill="currentColor" />
+      <circle cx="11.5" cy="18.5" r="2.5" transform="rotate(90 11.5 18.5)" fill="currentColor" />
+    </svg>
+
+  ),
+  'repeat': (
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="4.5" cy="11.5" r="2.5" fill="currentColor" />
+      <circle cx="11.5" cy="11.5" r="2.5" fill="currentColor" />
+      <circle cx="18.5" cy="11.5" r="2.5" fill="currentColor" />
+      <circle cx="4.5" cy="18.5" r="2.5" fill="currentColor" />
+      <circle cx="11.5" cy="18.5" r="2.5" fill="currentColor" />
+      <circle cx="18.5" cy="18.5" r="2.5" fill="currentColor" />
+      <circle cx="4.5" cy="4.5" r="2.5" fill="currentColor" />
+      <circle cx="11.5" cy="4.5" r="2.5" fill="currentColor" />
+      <circle cx="18.5" cy="4.5" r="2.5" fill="currentColor" />
+    </svg>
+
   )
 };
 

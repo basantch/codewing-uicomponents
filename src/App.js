@@ -241,7 +241,20 @@ export default function App() {
 
   const [url, setUrl] = useState(false)
 
-  const [background, setBackground] = useState({});
+  const [background, setBackground] = useState({
+    background_type: '',
+    backgroundColor: '#000000',
+    overlayColor: '#000000',
+    background_image: {
+      url: '',
+      x: {value: 0, unit: '%'},
+      y: {value: 0, unit: '%'}
+    },
+    background_position: 'default',
+    background_repeat: 'default',
+    background_attachment: 'default',
+    background_size: 'auto'
+  });
 
   /* Example function to render the CSS styles based on Focal Point Picker value */
   const style = {

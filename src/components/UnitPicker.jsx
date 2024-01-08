@@ -38,6 +38,7 @@ const UnitPickerStyles = styled.div`
     right: -17.5px;
     animation: fadeInUp 0.1s ease;
     border: 1px solid var(--cw__border-color);
+    z-index: 1;
     &::before,
     &::after {
       content: "";

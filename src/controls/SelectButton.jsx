@@ -1,4 +1,4 @@
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import styled from "@emotion/styled";
 import { Tooltip } from "../components";
 
@@ -148,7 +148,7 @@ const SelectButtonGroup = ({
   separate,
   isMultiple,
   size,
-  ...ControlGroup
+  ...ControlContainer
 }) => {
   const handleOnChange = (_value) => () => {
     if (isMultiple) {
@@ -169,7 +169,7 @@ const SelectButtonGroup = ({
     >
       {options.map(({ value: _value, ...rest }, i) => {
         const _checked = isMultiple ? value.includes(_value) : value === _value;
-        const { ..._rest } = { ...ControlGroup, ...rest };
+        const { ..._rest } = { ...ControlContainer, ...rest };
         return (
           <SelectButton
             key={i}
@@ -186,5 +186,5 @@ const SelectButtonGroup = ({
 };
 
 export default (props) => {
-  return ControlGroup(SelectButtonGroup)(props);
+  return ControlContainer(SelectButtonGroup)(props);
 };

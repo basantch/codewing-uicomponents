@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import { useState } from "@wordpress/element";
 import { UnitPicker } from "../components";
 import Icons from "../assets/Icons";
@@ -91,7 +91,7 @@ const SapcingInput = ({ label, ...rest }) => {
   );
 };
 
-const Spacing = ({ onChange, value, units, max, min, ...ControlGroup }) => {
+const Spacing = ({ onChange, value, units, max, min, ...ControlContainer }) => {
   const [locked, setLocked] = useState(false);
 
   const handleOnChange = (e) => {
@@ -133,7 +133,7 @@ const Spacing = ({ onChange, value, units, max, min, ...ControlGroup }) => {
             name={name}
             onChange={handleOnChange}
             value={value[name]}
-            {...ControlGroup}
+            {...ControlContainer}
           />
         );
       })}
@@ -158,5 +158,5 @@ const Spacing = ({ onChange, value, units, max, min, ...ControlGroup }) => {
 };
 
 export default (props) => {
-  return ControlGroup(Spacing)(props);
+  return ControlContainer(Spacing)(props);
 };

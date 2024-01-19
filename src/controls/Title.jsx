@@ -1,5 +1,5 @@
 import { Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import RangeSlider from "./RangeSlider";
 import Select from "./Select"
 
@@ -34,12 +34,12 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const Title = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />}>
+const Title = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />}>
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(Title)(props)
+    return ControlContainer(Title)(props)
 }

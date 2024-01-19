@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { Select, Text } from ".";
 import { Popover, PopoverButton } from "../components";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import Icons from "../assets/Icons";
 import SelectButton from "./SelectButton";
 
@@ -136,14 +136,14 @@ const PopoverContent = ({ value, onChange }) => {
   );
 };
 
-const FeaturedImage = ({ changed, ...ControlGroup }) => {
+const FeaturedImage = ({ changed, ...ControlContainer }) => {
   return (
-    <Popover content={<PopoverContent {...ControlGroup} />}>
+    <Popover content={<PopoverContent {...ControlContainer} />}>
       <PopoverButton changed={changed} />
     </Popover>
   );
 };
 
 export default (props) => {
-  return ControlGroup(FeaturedImage)(props);
+  return ControlContainer(FeaturedImage)(props);
 };

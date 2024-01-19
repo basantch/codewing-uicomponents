@@ -1,8 +1,8 @@
-import ControlGroup from "../containers/ControlGroup";
-const Text = ({onChange, ...ControlGroup}) => {
-    return <input type="text" onChange={(e) => onChange(e.target.value)} {...ControlGroup} />
+import ControlContainer from "../containers/ControlContainer";
+const Text = ({onChange, ...ControlContainer}) => {
+    return <input type="text" onChange={(e) => onChange(e.target.value)} {...ControlContainer} />
 }
 
 export default (props) => {
-    return ControlGroup(Text)(props)
+    return ControlContainer(Text)(props)
 }

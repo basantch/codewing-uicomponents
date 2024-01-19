@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import Icons from "../assets/Icons";
 
 const NumberStyles = styled.div`
@@ -36,7 +36,7 @@ const NumberStyles = styled.div`
     }
 `
 
-const InputNumber = ({value, min, max, onChange, step, ...ControlGroup}) => {
+const InputNumber = ({value, min, max, onChange, step, ...ControlContainer}) => {
     const checkType = typeof value === "number";
     const updateStep = step || 1;
 
@@ -58,7 +58,7 @@ const InputNumber = ({value, min, max, onChange, step, ...ControlGroup}) => {
             onChange={(e) => onChange(e.target.value)}
             min={min}
             max={max}
-            {...ControlGroup}
+            {...ControlContainer}
          />
         <button disabled={max <= value} type="button" onClick={handleIncrease}>
             {Icons.plus}
@@ -67,5 +67,5 @@ const InputNumber = ({value, min, max, onChange, step, ...ControlGroup}) => {
 }
 
 export default (props) => {
-    return ControlGroup(InputNumber)(props)
+    return ControlContainer(InputNumber)(props)
 }

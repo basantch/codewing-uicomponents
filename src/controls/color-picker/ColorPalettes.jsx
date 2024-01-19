@@ -1,7 +1,7 @@
 import { useState } from "@wordpress/element";
 import { Popover } from "../../components";
 import styled from "@emotion/styled";
-import ControlGroup from "../../containers/ControlGroup";
+import ControlContainer from "../../containers/ControlContainer";
 import Icons from "../../assets/Icons";
 import ColorSwatches from "./ColorSwatches";
 
@@ -22,7 +22,7 @@ const ColorPaletteOptions = styled.div`
   }
 `;
 
-const ColorPalettes = ({ value, onChange, colorPalettes, ...ControlGroup }) => {
+const ColorPalettes = ({ value, onChange, colorPalettes, ...ControlContainer }) => {
   const [isVisible, setIsVisible] = useState(false);
 
   const handleTrigger = (e) => {
@@ -82,5 +82,5 @@ const ColorPalettes = ({ value, onChange, colorPalettes, ...ControlGroup }) => {
 };
 
 export default (props) => {
-  return ControlGroup(ColorPalettes)(props);
+  return ControlContainer(ColorPalettes)(props);
 };

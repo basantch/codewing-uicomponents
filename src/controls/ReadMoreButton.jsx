@@ -1,6 +1,6 @@
 import { SelectButtonGroup, Switch, Text } from "."
 import { Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 
 const PopoverContent = ({ value, onChange, ...rest }) => {
     const { type, buttonLabel, showArrow } = value;
@@ -34,12 +34,12 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const ReadMoreButton = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />}>
+const ReadMoreButton = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />}>
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(ReadMoreButton)(props)
+    return ControlContainer(ReadMoreButton)(props)
 }

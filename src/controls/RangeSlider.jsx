@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { RangeControl } from "@wordpress/components";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import { UnitPicker } from "../components";
 
 const RangeStyles = styled.div`
@@ -52,13 +52,13 @@ const RangeStyles = styled.div`
   }
 `;
 
-const RangeSlider = ({ units, value, onChange, ...ControlGroup }) => {
+const RangeSlider = ({ units, value, onChange, ...ControlContainer }) => {
   return (
     <RangeStyles className={units || value?.unit ? "cw__has-unit" : ""}>
       <RangeControl
         value={+value.value}
         onChange={(val) => onChange({ ...value, value: val })}
-        {...ControlGroup}
+        {...ControlContainer}
       />
       {(units || value?.unit) && (
         <UnitPicker
@@ -72,5 +72,5 @@ const RangeSlider = ({ units, value, onChange, ...ControlGroup }) => {
 };
 
 export default (props) => {
-  return ControlGroup(RangeSlider)(props);
+  return ControlContainer(RangeSlider)(props);
 };

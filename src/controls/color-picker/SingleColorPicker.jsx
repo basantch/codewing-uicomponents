@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { ColorPalette, ColorPicker } from "@wordpress/components";
-import ControlGroup from "../../containers/ControlGroup";
+import ControlContainer from "../../containers/ControlContainer";
 import ColorPickerTrigger from "./ColorPickerTrigger";
 
 const ColorPickerHeader = styled.header`
@@ -10,7 +10,7 @@ const ColorPickerHeader = styled.header`
   margin: 0 -4px 13px;
 `;
 
-const SingleColorPicker = ({ colorPalette, value, title, interactive, ...ControlGroup }) => {
+const SingleColorPicker = ({ colorPalette, value, title, interactive, ...ControlContainer }) => {
   return (
     <ColorPickerTrigger color={value} title={title} interactive={interactive}>
       {colorPalette && (
@@ -20,7 +20,7 @@ const SingleColorPicker = ({ colorPalette, value, title, interactive, ...Control
             value={value}
             clearable={false}
             disableCustomColors
-            {...ControlGroup}
+            {...ControlContainer}
           />
         </ColorPickerHeader>
       )}
@@ -28,12 +28,12 @@ const SingleColorPicker = ({ colorPalette, value, title, interactive, ...Control
         color={value}
         enableAlpha
         defaultValue="#000"
-        {...ControlGroup}
+        {...ControlContainer}
       />
     </ColorPickerTrigger>
   );
 };
 
 export default (props) => {
-  return ControlGroup(SingleColorPicker)(props);
+  return ControlContainer(SingleColorPicker)(props);
 };

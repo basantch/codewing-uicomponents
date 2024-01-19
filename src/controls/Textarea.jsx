@@ -1,8 +1,8 @@
-import ControlGroup from "../containers/ControlGroup";
-const Textarea = ({onChange, ...ControlGroup}) => {
-    return <textarea onChange={(e) => onChange(e.target.value)} {...ControlGroup} />
+import ControlContainer from "../containers/ControlContainer";
+const Textarea = ({onChange, ...ControlContainer}) => {
+    return <textarea onChange={(e) => onChange(e.target.value)} {...ControlContainer} />
 }
 
 export default (props) => {
-    return ControlGroup(Textarea)(props)
+    return ControlContainer(Textarea)(props)
 }

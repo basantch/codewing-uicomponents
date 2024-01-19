@@ -26,3 +26,6 @@ export { default as Ratio } from "./Ratio";
 export { default as Sortable } from "./sortable/Sortable";
 export { default as SortableItem } from "./sortable/SortableItem";
 export { default as Background } from "./Background";
+export { default as GradientPicker } from "./GradientPicker";
+export { default as TokenField } from "./TokenField";
+export { default as ControlGroup } from "../containers/ControlGroup";

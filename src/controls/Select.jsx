@@ -1,4 +1,4 @@
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import { useState, useRef, useEffect } from "@wordpress/element";
 import styled from "@emotion/styled";
 import Tippy from "@tippyjs/react";
@@ -195,6 +195,18 @@ const SelectedBadgeStyle = styled.span`
     background: none;
     padding: 0;
     cursor: pointer;
+    flex: 0 0 24px;
+    height: 24px;
+    width: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--cw__transition);
+    border-radius: var(--cw__border-radius);
+    &:hover{
+      background-color: #ff0e0e;
+      color: #ffffff;
+    }
   }
 `;
 
@@ -356,5 +368,5 @@ const Select = ({
 };
 
 export default (props) => {
-  return ControlGroup(Select)(props);
+  return ControlContainer(Select)(props);
 };

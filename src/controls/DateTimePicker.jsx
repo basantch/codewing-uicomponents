@@ -1,10 +1,10 @@
 import { DateTimePicker } from "@wordpress/components";
 import { Popover } from "../components";
 import { useState } from "@wordpress/element";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 const moment = require("moment");
 
-const MyDateTimePicker = ({ value, format, placeholder, ...ControlGroup }) => {
+const MyDateTimePicker = ({ value, format, placeholder, ...ControlContainer }) => {
   const [datePopover, setDatePopover] = useState(false);
 
   const dateFormat = format || "YYYY-MM-DD, h:mm:ss a";
@@ -18,7 +18,7 @@ const MyDateTimePicker = ({ value, format, placeholder, ...ControlGroup }) => {
 
   return (
     <Popover
-      content={<DateTimePicker currentDate={value} {...ControlGroup} />}
+      content={<DateTimePicker currentDate={value} {...ControlContainer} />}
     >
       <input
         tabIndex={0}
@@ -35,5 +35,5 @@ const MyDateTimePicker = ({ value, format, placeholder, ...ControlGroup }) => {
 };
 
 export default (props) => {
-  return ControlGroup(MyDateTimePicker)(props);
+  return ControlContainer(MyDateTimePicker)(props);
 };

@@ -1,5 +1,5 @@
 import { InputNumber, SingleColorPicker, Select, Spacing } from "./";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import styled from "@emotion/styled";
 import { Popover, PopoverButton } from "../components";
 import Icons from "../assets/Icons";
@@ -64,7 +64,7 @@ const Border = ({
   changed,
   value,
   onChange,
-  ...ControlGroup
+  ...ControlContainer
 }) => {
   const { borderColor } = value;
   return (
@@ -74,11 +74,11 @@ const Border = ({
         title="Border Color"
         value={borderColor}
         onChange={(color) => onChange({ ...value, borderColor: color })}
-        {...ControlGroup}
+        {...ControlContainer}
       />
       <Popover
         content={
-          <PopoverContent value={value} onChange={onChange} {...ControlGroup} />
+          <PopoverContent value={value} onChange={onChange} {...ControlContainer} />
         }
       >
         <PopoverButton changed={changed} />
@@ -88,5 +88,5 @@ const Border = ({
 };
 
 export default (props) => {
-  return ControlGroup(Border)(props);
+  return ControlContainer(Border)(props);
 };

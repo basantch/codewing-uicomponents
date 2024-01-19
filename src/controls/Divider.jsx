@@ -1,5 +1,5 @@
 import { Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import Spacing from "./Spacing"
 
 const PopoverContent = ({ value, onChange, ...rest }) => {
@@ -15,12 +15,12 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const Divider = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />}>
+const Divider = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />}>
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(Divider)(props)
+    return ControlContainer(Divider)(props)
 }

@@ -1,6 +1,6 @@
 import Icons from "../assets/Icons"
 import { Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import { SelectButtonGroup } from "."
 
 const PopoverContent = ({ value, onChange }) => {
@@ -23,12 +23,12 @@ const PopoverContent = ({ value, onChange }) => {
     </>
 }
 
-const Categories = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />}>
+const Categories = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />}>
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(Categories)(props)
+    return ControlContainer(Categories)(props)
 }

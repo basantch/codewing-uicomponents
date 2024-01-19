@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Icons from "../assets/Icons";
+import Tooltip from "./Tooltip";
 
 const PopoverButtonStyle = styled.button`
   padding: 4px;
@@ -22,11 +23,13 @@ const PopoverButtonStyle = styled.button`
   }
 `;
 
-const PopoverButton = ({ changed, children, ...rest }) => {
+const PopoverButton = ({ title, changed, children, ...rest }) => {
   return (
-    <PopoverButtonStyle type="button" className={changed === 1 ? "changed" : ""} {...rest}>
-      {children || Icons.pen}
-    </PopoverButtonStyle>
+    <Tooltip title={title}>
+      <PopoverButtonStyle type="button" className={changed === 1 ? "changed" : ""} {...rest}>
+        {children || Icons.pen}
+      </PopoverButtonStyle>
+    </Tooltip>
   );
 };
 

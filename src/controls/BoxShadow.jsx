@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { RangeSlider, SingleColorPicker, Switch } from ".";
 import { Popover, PopoverButton } from "../components";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import SelectButton from "./SelectButton";
 
 const BoxShadowPopoverContent = styled.div`
@@ -99,7 +99,7 @@ const BoxShadow = ({
   value,
   onChange,
   changed,
-  ...ControlGroup
+  ...ControlContainer
 }) => {
   const { color } = value;
   return (
@@ -118,5 +118,5 @@ const BoxShadow = ({
 };
 
 export default (props) => {
-  return ControlGroup(BoxShadow)(props);
+  return ControlContainer(BoxShadow)(props);
 };

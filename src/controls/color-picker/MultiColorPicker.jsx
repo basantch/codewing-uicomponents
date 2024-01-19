@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import ControlGroup from "../../containers/ControlGroup";
+import ControlContainer from "../../containers/ControlContainer";
 import SingleColorPicker from "./SingleColorPicker";
 
 const MultiColorPickerStyle = styled.div`
@@ -8,7 +8,7 @@ const MultiColorPickerStyle = styled.div`
   gap: 4px;
 `;
 
-const MultiColorPicker = ({ colors, value, onChange, ...ControlGroup }) => {
+const MultiColorPicker = ({ colors, value, onChange, ...ControlContainer }) => {
   return (
     <MultiColorPickerStyle>
       {colors?.map(({ title, name, colorPalette }, i) => {
@@ -19,7 +19,7 @@ const MultiColorPicker = ({ colors, value, onChange, ...ControlGroup }) => {
             title={title}
             colorPalette={colorPalette}
             onChange={(_color) => onChange({ ...value, [name]: _color })}
-            {...ControlGroup}
+            {...ControlContainer}
           />
         );
       })}
@@ -28,5 +28,5 @@ const MultiColorPicker = ({ colors, value, onChange, ...ControlGroup }) => {
 };
 
 export default (props) => {
-  return ControlGroup(MultiColorPicker)(props);
+  return ControlContainer(MultiColorPicker)(props);
 };

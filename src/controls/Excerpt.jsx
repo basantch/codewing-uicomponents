@@ -1,5 +1,5 @@
 import { Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import { InputNumber, Select } from "."
 
 const PopoverContent = ({ value, onChange, ...rest }) => {
@@ -28,12 +28,12 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const Excerpt = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />}>
+const Excerpt = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />}>
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(Excerpt)(props)
+    return ControlContainer(Excerpt)(props)
 }

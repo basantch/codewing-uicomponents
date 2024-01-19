@@ -1,6 +1,6 @@
 import styled from "@emotion/styled"
 import { Popover } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import { SelectButtonGroup, Text } from "."
 
 const ratioTypes = [
@@ -84,10 +84,10 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const Ratio = ({ value, ...ControlGroup }) => {
+const Ratio = ({ value, ...ControlContainer }) => {
     const { ratioType, ratio, size } = value;
     const ratioLabel = ratioTypes.find(r => r.value === ratioType).label;
-    return <Popover content={<PopoverContent value={value} {...ControlGroup} />}>
+    return <Popover content={<PopoverContent value={value} {...ControlContainer} />}>
         <RatioInputWrapper tabIndex={0} className="cw__ratio-input-wrapper">
             <div className="cw__ratio-input">
                 {ratioType && <span>{ratioLabel}</span>}
@@ -99,5 +99,5 @@ const Ratio = ({ value, ...ControlGroup }) => {
 }
 
 export default (props) => {
-    return ControlGroup(Ratio)(props)
+    return ControlContainer(Ratio)(props)
 }

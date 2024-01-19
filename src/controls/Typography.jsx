@@ -1,6 +1,6 @@
 import { RangeSlider, Select } from ".";
 import { Popover, PopoverButton } from "../components";
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 
 const TypographyContent = ({
   value,
@@ -149,14 +149,14 @@ const TypographyContent = ({
   );
 };
 
-const Typography = ({ changed, ...ControlGroup }) => {
+const Typography = ({ changed, ...ControlContainer }) => {
   return (
-    <Popover content={<TypographyContent {...ControlGroup} />}>
+    <Popover content={<TypographyContent {...ControlContainer} />}>
       <PopoverButton changed={changed} />
     </Popover>
   );
 };
 
 export default (props) => {
-  return ControlGroup(Typography)(props);
+  return ControlContainer(Typography)(props);
 };

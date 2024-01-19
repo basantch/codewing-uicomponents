@@ -1,4 +1,4 @@
-import ControlGroup from "../containers/ControlGroup";
+import ControlContainer from "../containers/ControlContainer";
 import styled from "@emotion/styled";
 
 const SwitchStyles = styled.div`
@@ -31,24 +31,24 @@ const SwitchStyles = styled.div`
     }
 `
 
-const Switch = ({onChange, value}) => {
+const Switch = ({ onChange, value }) => {
 
-            const handleSwitchOnKeyDown = (e) => {
-                if(e.type === "keydown" && e.key === "Enter"){
-                    onChange(!value)
-                }
-            }
+    const handleSwitchOnKeyDown = (e) => {
+        if (e.type === "keydown" && e.key === "Enter") {
+            onChange(!value)
+        }
+    }
 
-            return <SwitchStyles 
-                        tabIndex={0}
-                        className={`cw__switch${value ? ' checked' : ''}`}
-                        onClick={() => onChange(!value)}
-                        onKeyDown={handleSwitchOnKeyDown}
-                    >
-                        <span></span>
-                    </SwitchStyles>
+    return <SwitchStyles
+        tabIndex={0}
+        className={`cw__switch${value ? ' checked' : ''}`}
+        onClick={() => onChange(!value)}
+        onKeyDown={handleSwitchOnKeyDown}
+    >
+        <span></span>
+    </SwitchStyles>
 }
 
 export default (props) => {
-    return ControlGroup(Switch)(props)
+    return ControlContainer(Switch)({ ...props, hideResetButton: true, direction: 'horizontal' })
 }

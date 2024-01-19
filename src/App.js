@@ -21,11 +21,15 @@ import {
   Typography,
   Ratio,
   Background,
+  GradientPicker,
+  TokenField,
+  ControlGroup,
 } from "./controls";
 import { useState, useEffect, useMemo } from "@wordpress/element";
 import Icons from "./assets/Icons";
 import Sort from "./Sort";
 import { FocalPointPicker } from "@wordpress/components";
+import Button from "./controls/Button";
 
 const colorPalettes = [
   {
@@ -247,14 +251,16 @@ export default function App() {
     overlayColor: '#000000',
     background_image: {
       url: '',
-      x: {value: 0, unit: '%'},
-      y: {value: 0, unit: '%'}
+      x: { value: 0, unit: '%' },
+      y: { value: 0, unit: '%' }
     },
     background_position: 'default',
     background_repeat: 'default',
     background_attachment: 'default',
-    background_size: 'auto'
+    background_size: 'auto',
+    gradient: '#000000'
   });
+  const [token, setToken] = useState([]);
 
   /* Example function to render the CSS styles based on Focal Point Picker value */
   const style = {
@@ -597,21 +603,41 @@ export default function App() {
           onChange={setImageRatio}
           divider="bottom:top"
         />
-        <Background
-          label="Background"
-          direction="horizontal"
-          divider="bottom"
-          value={background}
-          onChange={setBackground}
-        />
-        <FocalPointPicker
-          url={url}
-          value={focalPoint}
-          onDragStart={setFocalPoint}
-          onDrag={setFocalPoint}
-          onChange={setFocalPoint}
-        />
-        <div style={style} />
+        <ControlGroup
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        >
+          <Background
+            label="Background"
+            direction="horizontal"
+            divider="bottom"
+            value={background}
+            onChange={setBackground}
+          />
+          <TokenField
+            label="Token Field"
+            value={token}
+            onChange={setToken}
+          />
+        </ControlGroup>
+        <ControlGroup
+          label="Control Group"
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+        >
+          <Background
+            label="Background"
+            direction="horizontal"
+            divider="bottom"
+            value={background}
+            onChange={setBackground}
+          />
+          <TokenField
+            label="Token Field"
+            value={token}
+            onChange={setToken}
+            description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          />
+        </ControlGroup>
+        <Button value="Button" />
       </div>
     </>
   );

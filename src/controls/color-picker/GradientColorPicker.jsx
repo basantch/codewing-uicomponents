@@ -1,8 +1,8 @@
 import { GradientPicker } from "@wordpress/components";
-import ControlGroup from "../../containers/ControlGroup";
+import ControlContainer from "../../containers/ControlContainer";
 import ColorPickerTrigger from "./ColorPickerTrigger";
 
-const GradientColorPicker = ({ value, title, interactive, ...ControlGroup }) => {
+const GradientColorPicker = ({ value, title, interactive, ...ControlContainer }) => {
   return (
     <ColorPickerTrigger color={value} title={title} interactive={interactive}>
       <div className="cw__components-color-picker">
@@ -30,7 +30,7 @@ const GradientColorPicker = ({ value, title, interactive, ...ControlGroup }) => 
             },
           ]}
           clearable={false}
-          {...ControlGroup}
+          {...ControlContainer}
         />
       </div>
     </ColorPickerTrigger>
@@ -38,5 +38,5 @@ const GradientColorPicker = ({ value, title, interactive, ...ControlGroup }) => 
 };
 
 export default (props) => {
-  return ControlGroup(GradientColorPicker)(props);
+  return ControlContainer(GradientColorPicker)(props);
 };

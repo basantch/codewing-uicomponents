@@ -1,5 +1,5 @@
 import { ControlTitle, Popover, PopoverButton } from "../components"
-import ControlGroup from "../containers/ControlGroup"
+import ControlContainer from "../containers/ControlContainer"
 import { InputNumber, Select, SelectButtonGroup, Switch, Text } from ".";
 import Icons from "../assets/Icons";
 
@@ -86,12 +86,12 @@ const PopoverContent = ({ value, onChange, ...rest }) => {
     </>
 }
 
-const PostMeta = ({ changed, ...ControlGroup }) => {
-    return <Popover content={<PopoverContent {...ControlGroup} />} placement="bottom">
+const PostMeta = ({ changed, ...ControlContainer }) => {
+    return <Popover content={<PopoverContent {...ControlContainer} />} placement="bottom">
         <PopoverButton changed={changed} />
     </Popover>
 }
 
 export default (props) => {
-    return ControlGroup(PostMeta)(props)
+    return ControlContainer(PostMeta)(props)
 }

@@ -604,22 +604,6 @@ export default function App() {
           divider="bottom:top"
         />
         <ControlGroup
-          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-        >
-          <Background
-            label="Background"
-            direction="horizontal"
-            divider="bottom"
-            value={background}
-            onChange={setBackground}
-          />
-          <TokenField
-            label="Token Field"
-            value={token}
-            onChange={setToken}
-          />
-        </ControlGroup>
-        <ControlGroup
           label="Control Group"
           description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
         >

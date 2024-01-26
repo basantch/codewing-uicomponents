@@ -13,7 +13,6 @@ import {
   sortableKeyboardCoordinates,
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
-// import SortableItem from './SortableItem';
 
 const SortableWrapper = styled.div`
   display: flex;
@@ -22,7 +21,7 @@ const SortableWrapper = styled.div`
   padding: 16px 0;
 `
 
-const Sortable = ({ items, setItems, children }) => {
+const Sortable = ({ items, setItems, children, ...rest }) => {
 
   const sensors = useSensors(
     useSensor(PointerSensor),
@@ -45,7 +44,7 @@ const Sortable = ({ items, setItems, children }) => {
   }
 
   return (
-    <SortableWrapper>
+    <SortableWrapper {...rest}>
       <DndContext
         sensors={sensors}
         collisionDetection={closestCenter}
@@ -55,7 +54,6 @@ const Sortable = ({ items, setItems, children }) => {
           items={items}
           strategy={verticalListSortingStrategy}
         >
-          {/* {items?.map(({ id, component }) => <SortableItem key={id} id={id}>{component}</SortableItem>)} */}
           {children}
         </SortableContext>
       </DndContext>

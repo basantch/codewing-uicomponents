@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSortable } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
 import styled from '@emotion/styled';
@@ -57,8 +56,8 @@ const SortableItem = (props) => {
     };
 
     return (
-        <SortableItemStyle ref={setNodeRef} style={style} >
-            <button className="wc__sort-button" type="button" {...attributes} {...listeners}>
+        <SortableItemStyle {...attributes} ref={setNodeRef} style={style} >
+            <button className="wc__sort-button" type="button" {...listeners}>
                 {Icons.move}
             </button>
             {children}

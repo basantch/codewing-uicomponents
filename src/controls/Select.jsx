@@ -1,8 +1,18 @@
-import ControlContainer from "../containers/ControlContainer";
-import { useState, useRef, useEffect } from "@wordpress/element";
+import {
+  DndContext,
+  KeyboardSensor,
+  PointerSensor,
+  closestCenter,
+  useSensor,
+  useSensors,
+} from "@dnd-kit/core";
+import { SortableContext, arrayMove, sortableKeyboardCoordinates, useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 import styled from "@emotion/styled";
 import Tippy from "@tippyjs/react";
+import { useEffect, useRef, useState } from "@wordpress/element";
 import { __ } from '@wordpress/i18n';
+import ControlContainer from "../containers/ControlContainer";
 
 const Icons = {
   close: (
@@ -47,19 +57,19 @@ const SelectStyles = styled.div`
 	}
   .cw__custom-select__input-wrapper{
 	  &::after {
-		content: "";
-		width: 1rem;
-		height: 1rem;
-		background-color: var(--cw__inactive-color);
-		position: absolute;
-		right: 0.5rem;
-		top: 50%;
-		transform: translateY(-50%);
-		transition: var(--cw__transition);
-		mask: url("data:image/svg+xml,%3Csvg width='15' height='8' viewBox='0 0 15 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5177 1L7.5177 7L13.5177 1' stroke='%2393999F' stroke-width='2' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
-		mask-size: 100%;
-		mask-position: center;
-		mask-repeat: no-repeat;
+      content: "";
+      width: 1rem;
+      height: 1rem;
+      background-color: var(--cw__inactive-color);
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      transition: var(--cw__transition);
+      mask: url("data:image/svg+xml,%3Csvg width='15' height='8' viewBox='0 0 15 8' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1.5177 1L7.5177 7L13.5177 1' stroke='%2393999F' stroke-width='2' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/svg%3E%0A");
+      mask-size: 100%;
+      mask-position: center;
+      mask-repeat: no-repeat;
 	  }
   }
   &.is-multiple {
@@ -174,6 +184,11 @@ const SelectStyles = styled.div`
     .placeholder {
       color: var(--cw__inactive-color);
     }
+    > .cw__badge-container{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
   }
   &:not(.is-multiple) {
     .cw__custom-select__input-wrapper {
@@ -182,22 +197,29 @@ const SelectStyles = styled.div`
   }
 `;
 
-const SelectedBadgeStyle = styled.span`
+const SelectedBadgeStyle = styled.div`
   display: inline-flex;
-  gap: 4px;
+  gap: 2px;
   align-items: center;
   color: #2b3034;
-  padding: 6px 12px;
+  padding: 6px;
   background-color: #e5f0ff;
   border-radius: var(--cw__border-radius);
+  transition: var(--cw__transition);
+  > span{
+    max-width: 90px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
   .cw__cancel {
     border: none;
     background: none;
     padding: 0;
     cursor: pointer;
-    flex: 0 0 24px;
-    height: 24px;
-    width: 24px;
+    flex: 0 0 20px;
+    height: 20px;
+    width: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -271,6 +293,7 @@ const Select = ({
   value,
   isMultiple,
   isSearchable,
+  isSortable = false,
   placeholder,
   variant,
   style,
@@ -310,6 +333,8 @@ const Select = ({
     );
   };
 
+  const Badge = isSortable ? Sortable : "div";
+
   return (
     <SelectStyles className={`${isMultiple ? " is-multiple" : ""} ${variant || ""}`}>
       <Tippy
@@ -335,21 +360,25 @@ const Select = ({
             ref={selectInput}
             style={style}
           >
-            {isMultiple &&
-              value?.map((val, i) => {
-                const _selectedValue = options?.find(
-                  (a) => a.value === val,
-                )?.label;
-                return (
-                  <SelectedBadge
-                    key={i}
-                    text={_selectedValue}
-                    onCancel={() => {
-                      onCancelClick ? onCancelClick(val) : onChange(value?.filter((a) => a !== val))
-                    }}
-                  />
-                );
-              })
+            {isMultiple && <Badge className={!isSortable ? 'cw__badge-container' : ''} style={{ padding: '0px' }} items={value} setItems={onChange}>
+              {
+                value?.map((val, i) => {
+                  const _selectedValue = options?.find(
+                    (a) => a.value === val,
+                  )?.label;
+                  return (
+
+                    <SortableItem
+                      key={val} id={val}
+                      text={_selectedValue}
+                      onCancel={() => {
+                        onCancelClick ? onCancelClick(val) : onChange(value?.filter((a) => a !== val))
+                      }}
+                    />
+                  );
+                })
+              }
+            </Badge>
             }
             {!isMultiple && (
               <span className="cw__custom-select__input-value">
@@ -370,3 +399,73 @@ const Select = ({
 export default (props) => {
   return ControlContainer(Select)(props);
 };
+
+const SortableItem = (props) => {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id: props.id });
+
+  const { children } = props
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  return (
+    <SelectedBadgeStyle style={style} ref={setNodeRef} {...attributes} >
+      <span title={props?.text} className="cw__selected-badge" {...listeners}>
+        {props?.text}
+      </span>
+      <button
+        type="button"
+        aria-label="cancel"
+        className="cw__cancel"
+        onClick={props?.onCancel}
+      >
+        {Icons.close}
+      </button>
+    </SelectedBadgeStyle>
+  );
+}
+
+const Sortable = ({ children, items, setItems }) => {
+
+  const sensors = useSensors(
+    useSensor(PointerSensor),
+    useSensor(KeyboardSensor, {
+      coordinateGetter: sortableKeyboardCoordinates,
+    })
+  );
+
+  const handleDragEnd = (e) => {
+    const { active, over } = e;
+    if (active.id !== over.id) {
+      setItems((items) => {
+        const oldIndex = items.indexOf(active.id);
+        const newIndex = items.indexOf(over.id);
+
+        return arrayMove(items, oldIndex, newIndex);
+      });
+    }
+  }
+
+  return (
+    <DndContext
+      sensors={sensors}
+      collisionDetection={closestCenter}
+      onDragEnd={handleDragEnd}
+    >
+      <SortableContext
+        items={items}
+      >
+        {children}
+      </SortableContext>
+    </DndContext>
+  );
+
+}

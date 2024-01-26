@@ -7,6 +7,7 @@ const RangeStyles = styled.div`
   display: flex;
   > .components-base-control {
     flex: 1;
+    margin-bottom: 0;
     .components-base-control__field {
       margin-bottom: 0;
       .components-input-control__input {
@@ -52,18 +53,20 @@ const RangeStyles = styled.div`
   }
 `;
 
-const RangeSlider = ({ units, value, onChange, ...ControlContainer }) => {
+const RangeSlider = ({ units, value, onChange, className, ...ControlContainer }) => {
+  const { value: _value, unit } = value;
   return (
-    <RangeStyles className={units || value?.unit ? "cw__has-unit" : ""}>
+    <RangeStyles className={units || unit ? "cw__has-unit" : ""}>
       <RangeControl
-        value={+value.value}
+        value={+_value}
         onChange={(val) => onChange({ ...value, value: val })}
-        {...ControlContainer}
+        min={units?.find(u => u.unit == unit)?.min || 0}
+        max={units?.find(u => u.unit == unit)?.max || 100}
       />
-      {(units || value?.unit) && (
+      {(units || unit) && (
         <UnitPicker
-          units={units}
-          value={value?.unit}
+          units={units?.map(u => u.unit)}
+          value={unit}
           onChange={(u) => onChange({ ...value, unit: u })}
         />
       )}

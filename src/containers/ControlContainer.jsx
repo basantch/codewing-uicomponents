@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { useRef } from "@wordpress/element";
+import { useRef, useState } from "@wordpress/element";
 import { Tooltip } from "../components";
 import Icons from "../assets/Icons";
 import "tippy.js/dist/tippy.css";
@@ -226,9 +226,11 @@ const ControlContainer =
         _ref.current = value;
       }
 
+      const [responsiveState, setResponsiveState] = useState('desktop');
+
       const handleOnChange = (_value) => {
         onChange(
-          responsive ? { ...value, [responsive?.currentState]: _value } : _value,
+          responsive ? { ...value, [responsiveState]: _value } : _value,
         );
       };
       const border = divider ? ` cw__divider-${divider}` : "";
@@ -242,7 +244,7 @@ const ControlContainer =
 
       return (
         <ControlItemStyles
-          className={`cw__control-item ${direction || ""}`}
+          className={`cw__control-item ${direction || ""} ${className || ""}`}
           data-visibility={visibility ? "hidden" : false}
           data-divider={divider}
         >
@@ -273,8 +275,8 @@ const ControlContainer =
                   }
                   {responsive && (
                     <ResponsiveControl
-                      onChange={responsive.setState}
-                      device={responsive.currentState}
+                      onChange={setResponsiveState}
+                      device={responsiveState}
                     />
                   )}
                   {
@@ -290,7 +292,7 @@ const ControlContainer =
           <section className={className || ""} style={containerStyle}>
             <Component
               changed={preValue !== currentValue ? 1 : 0}
-              value={responsive ? value[responsive?.currentState] : value}
+              value={responsive ? value[responsiveState] : value}
               onChange={(res) => handleOnChange(res)}
               {...rest}
             />

@@ -25,6 +25,15 @@ const BoxShadowPopoverContent = styled.div`
       background-repeat: no-repeat;
     }
   }
+  .cw__control-item.cw__box-shadow-blur{
+		.components-range-control__wrapper{
+			&::after{
+				background-image: url("data:image/svg+xml,%3Csvg width='2' height='7' viewBox='0 0 2 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clipPath='url(%23clip0_330_2022)'%3E%3Cpath d='M0.6073 6.5625V0.4375V6.5625Z' fill='%23D9D9D9'/%3E%3Cpath d='M0.6073 6.5625V0.4375' stroke='%2342474B' stroke-width='0.875' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_330_2022'%3E%3Crect width='0.875' height='7' fill='white' transform='translate(0.1698)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A"),
+				url("data:image/svg+xml,%3Csvg width='8' height='7' viewBox='0 0 8 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clipPath='url(%23clip0_330_2024)'%3E%3Cpath d='M3.98232 0.743652V6.25615M1.22607 3.4999H6.73857' stroke='%2342474B' stroke-width='0.875' strokeLinecap='round' strokeLinejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_330_2024'%3E%3Crect width='7' height='7' fill='white' transform='translate(0.4823)'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+				background-position: left center, right center;
+			}
+		}
+	}
 `;
 
 const BoxShadowStyle = styled.div`
@@ -33,7 +42,7 @@ const BoxShadowStyle = styled.div`
   gap: 8px;
 `;
 
-const PopoverContent = ({ units, value, onChange }) => {
+const PopoverContent = ({ value, onChange }) => {
   const { enable, horizontal, vertical, blur, spread, position } = value;
   return (
     <BoxShadowPopoverContent>
@@ -48,36 +57,53 @@ const PopoverContent = ({ units, value, onChange }) => {
         label="Horizontal"
         value={horizontal}
         onChange={(val) => onChange({ ...value, horizontal: val })}
-        units={units}
-        min={-100}
-        max={100}
+        units={[
+          {
+            unit: 'px',
+            min: -100,
+            max: 100
+          }
+        ]}
         isChildren
       />
       <RangeSlider
         label="Vertical"
         value={vertical}
         onChange={(val) => onChange({ ...value, vertical: val })}
-        units={units}
-        min={-100}
-        max={100}
+        units={[
+          {
+            unit: 'px',
+            min: -100,
+            max: 100
+          }
+        ]}
         isChildren
       />
       <RangeSlider
         label="Blur"
         value={blur}
         onChange={(val) => onChange({ ...value, blur: val })}
-        units={units}
-        min={-100}
-        max={100}
+        units={[
+          {
+            unit: 'px',
+            min: 0,
+            max: 100
+          }
+        ]}
+        className="cw__box-shadow-blur"
         isChildren
       />
       <RangeSlider
         label="Spread"
         value={spread}
         onChange={(val) => onChange({ ...value, spread: val })}
-        units={units}
-        min={-100}
-        max={100}
+        units={[
+          {
+            unit: 'px',
+            min: -100,
+            max: 100
+          }
+        ]}
         isChildren
       />
       <SelectButton
@@ -104,12 +130,12 @@ const BoxShadow = ({
   const { color } = value;
   return (
     <BoxShadowStyle>
-      <SingleColorPicker
+      {value?.enable && <SingleColorPicker
         colorPalette={colorPalette}
         value={color}
         onChange={(val) => onChange({ ...value, color: val })}
         isChildren
-      />
+      />}
       <Popover content={<PopoverContent value={value} onChange={onChange} />}>
         <PopoverButton changed={changed} />
       </Popover>

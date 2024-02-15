@@ -158,7 +158,7 @@ export default function App() {
   });
   const [visibility, setVisibility] = useState(["desktop", "tablet"]);
   const [image, setImage] = useState("");
-  const [date, setDate] = useState(false);
+  const [date, setDate] = useState('');
   const [number, setNumber] = useState(0);
   const [palette, setPalette] = useState(colorPalettes[0]);
   const [linkColor, setLinkColor] = useState({
@@ -166,36 +166,9 @@ export default function App() {
     hover: "#216BDB",
   });
   const [borderStyle, setBorderStyle] = useState({
-    borderColor: "#000000",
-    borderWidth: 0,
-    borderStyle: {
-      desktop: "none",
-      tablet: "none",
-      mobile: "none",
-    },
-    borderRadius: {
-      desktop: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        unit: "px",
-      },
-      tablet: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        unit: "px",
-      },
-      mobile: {
-        top: 0,
-        right: 0,
-        bottom: 0,
-        left: 0,
-        unit: "px",
-      },
-    },
+    color: "#000000",
+    width: 0,
+    style: "none"
   });
 
   const [boxShadow, setBoxShadow] = useState({
@@ -503,9 +476,6 @@ export default function App() {
           divider="top"
           value={padding}
           onChange={setPadding}
-          units={["px", "rem", "em", "pt", "vh", "vw"]}
-          min={0}
-          max={10}
         />
         <SelectButtonGroup
           divider="top"

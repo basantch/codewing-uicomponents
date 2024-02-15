@@ -1,7 +1,7 @@
 import styled from "@emotion/styled"
 
 const ControlGroupStyle = styled.div`
-    &:not(:first-child){
+    &:not(:first-of-type){
         margin-top: 16px;
     }
     &:not(:last-child){
@@ -31,8 +31,8 @@ const ControlGroupContent = styled.div`
         background-color: var(--cw__background-color);
     }
     > .cw__control-item{
-        padding-top: 12px;
-        padding-bottom: 12px;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
         &:not(.horizontal){
             > header{
                 margin-bottom: 8px;
@@ -42,11 +42,11 @@ const ControlGroupContent = styled.div`
             margin: 8px 0;
         }
         &:first-of-type{
-            padding-top: 0;
+            padding-top: 0 !important;
             border-top: 0 !important;
         }
         &:last-of-type{
-            padding-bottom: 0;
+            padding-bottom: 0 !important;
             border-bottom: 0 !important;
         }
     }

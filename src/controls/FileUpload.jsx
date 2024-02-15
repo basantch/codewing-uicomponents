@@ -170,7 +170,6 @@ const FileUpload = ({ value, onChange, wpMediaUploader, buttonLabel, ...ControlC
     if (value) {
         ({ _value } = value);
     }
-    console.debug({ value })
     return <FileUploadStyle>
         {value?.url && (
             <div className="cw__media-preview">

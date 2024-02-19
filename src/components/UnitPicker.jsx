@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { useState } from "@wordpress/element";
-import OutsideClickHandler from "react-outside-click-handler";
+import Popover from "./Popover";
 
 const UnitPickerStyles = styled.div`
   display: inline-block;
@@ -79,6 +79,36 @@ const UnitPickerStyles = styled.div`
   }
 `;
 
+const UnitPickerOptions = styled.div`
+  max-width: 72px;
+  width: 72px;
+  display: flex;
+  flex-wrap: wrap;
+  span {
+    min-width: 35px;
+    flex-basis: 0;
+    flex-grow: 1;
+    display: inline-block;
+    padding: 0.5rem 0.25rem;
+    text-align: center;
+    font-size: 12px;
+    cursor: pointer;
+    border-top: 1px solid #dcdcdc;
+    &:nth-of-type(2n + 1) {
+      border-right: 1px solid #dcdcdc;
+    }
+    &:nth-of-type(-n + 2) {
+      border-top: 0;
+    }
+    &:last-child {
+      border-right: 0;
+    }
+    &:hover {
+      background-color: var(--cw__background-color);
+    }
+  }
+`
+
 const UnitPicker = ({ value, onChange, units }) => {
   const [open, setOpen] = useState(false);
 
@@ -97,17 +127,10 @@ const UnitPicker = ({ value, onChange, units }) => {
 
   return (
     <UnitPickerStyles className="cw__unit-picker-wrapper">
-      <OutsideClickHandler onOutsideClick={() => setOpen(false)}>
-        <button
-          tabIndex={0}
-          type="button"
-          onClick={() => setOpen(!open)}
-          onKeyDown={handleOpenOnKeyDown}
-        >
-          {value}
-        </button>
-        {units && open && (
-          <div className="cw__unit-picker-options">
+      <Popover
+        className='cw__unit-picker-popover'
+        content={
+          <UnitPickerOptions>
             {units?.map((unit, i) => {
               return (
                 <span
@@ -120,9 +143,19 @@ const UnitPicker = ({ value, onChange, units }) => {
                 </span>
               );
             })}
-          </div>
-        )}
-      </OutsideClickHandler>
+          </UnitPickerOptions>
+        }
+        disabled={(units || [])?.length <= 1}
+      >
+        <button
+          tabIndex={0}
+          type="button"
+          onClick={() => setOpen(!open)}
+          onKeyDown={handleOpenOnKeyDown}
+        >
+          {value}
+        </button>
+      </Popover>
     </UnitPickerStyles>
   );
 };

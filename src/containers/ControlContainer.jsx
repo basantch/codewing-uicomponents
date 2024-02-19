@@ -2,9 +2,6 @@ import styled from "@emotion/styled";
 import { useRef, useState } from "@wordpress/element";
 import { Tooltip } from "../components";
 import Icons from "../assets/Icons";
-import "tippy.js/dist/tippy.css";
-import "tippy.js/animations/scale.css";
-import "tippy.js/animations/shift-away.css";
 import "../assets/styles.scss";
 
 const ControlItemStyles = styled.div`

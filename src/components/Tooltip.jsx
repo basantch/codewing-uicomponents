@@ -18,6 +18,7 @@ export default ({ children, title, ...rest }) => {
         className="wc__tooltip"
         content={title}
         disabled={!title}
+        animation="shift-away"
         arrow
         {...rest}
       >

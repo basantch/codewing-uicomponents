@@ -43,7 +43,7 @@ const BoxShadowStyle = styled.div`
 `;
 
 const PopoverContent = ({ value, onChange }) => {
-  const { enable, horizontal, vertical, blur, spread, position } = value;
+  const { enable, horizontalOffset, verticalOffset, blur, spread, position } = value;
   return (
     <BoxShadowPopoverContent>
       <Switch
@@ -55,7 +55,7 @@ const PopoverContent = ({ value, onChange }) => {
       />
       <RangeSlider
         label="Horizontal"
-        value={horizontal}
+        value={horizontalOffset}
         onChange={(val) => onChange({ ...value, horizontal: val })}
         units={[
           {
@@ -68,7 +68,7 @@ const PopoverContent = ({ value, onChange }) => {
       />
       <RangeSlider
         label="Vertical"
-        value={vertical}
+        value={verticalOffset}
         onChange={(val) => onChange({ ...value, vertical: val })}
         units={[
           {
@@ -144,5 +144,5 @@ const BoxShadow = ({
 };
 
 export default (props) => {
-  return ControlContainer(BoxShadow)(props);
+  return ControlContainer(BoxShadow)({...props, direction: 'horizontal'});
 };

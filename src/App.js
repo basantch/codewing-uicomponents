@@ -174,8 +174,8 @@ export default function App() {
   const [boxShadow, setBoxShadow] = useState({
     enable: false,
     color: "",
-    horizontal: { value: 0, unit: "px" },
-    vertical: { value: 0, unit: "px" },
+    horizontalOffset: { value: 0, unit: "px" },
+    verticalOffset: { value: 0, unit: "px" },
     blur: { value: 0, unit: "px" },
     spread: { value: 0, unit: "px" },
     position: "inset",
@@ -301,6 +301,24 @@ export default function App() {
           isMultiple
           isSearchable
         />
+        <Select
+          help="Lorem ipsum dolor sit amet consectetur adipiscing elit nascetur velit sem faucibus sagittis felis convallis turpis"
+          label="Multi Select Input"
+          placeholder="Select Multiple Options..."
+          divider={"top"}
+          value={multiSelectValue}
+          options={[
+            { value: "option-one", label: "Option One" },
+            { value: "option-two", label: "Option Two" },
+            { value: "option-three", label: "Option Three" },
+            { value: "option-four", label: "Option Four" },
+            { value: "option-five", label: "Option Five" },
+          ]}
+          onChange={setMultiSelectValue}
+          description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
+          isMultiple
+          isSortable
+        />
         <Text
           label="Text Input"
           placeholder="Text"
@@ -410,10 +428,8 @@ export default function App() {
           divider="top"
           value={columns}
           onChange={setColumns}
-          min={0}
-          max={1500}
+          units={[{ unit: 'px', min: 0, max: 10 }, { unit: 'em', min: 0, max: 10 }]}
           description="Lorem ipsum dolor, sit amet consectetur adipisicing elit."
-          units={["px", "rem", "em", "pt", "vh", "vw"]}
         />
         <ColorPalettes
           divider="top"
@@ -475,6 +491,7 @@ export default function App() {
           label="Padding"
           divider="top"
           value={padding}
+          units={[{ unit: 'px', min: 0, max: 10 }, { unit: 'em', min: 0, max: 10 }]}
           onChange={setPadding}
         />
         <SelectButtonGroup

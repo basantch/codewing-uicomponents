@@ -3,6 +3,7 @@ import ControlContainer from "../containers/ControlContainer";
 import { useState } from "@wordpress/element";
 import { UnitPicker } from "../components";
 import Icons from "../assets/Icons";
+import { isBoolean } from "lodash";
 
 const SpacingInputStyles = styled.label`
   text-align: center;
@@ -139,7 +140,8 @@ const SapcingInput = ({ label, value, ...rest }) => {
 
 const Spacing = ({ onChange, value, units, ...ControlContainer }) => {
   const [locked, setLocked] = useState(false);
-  const findUnit = (units || defaultUnits).find(m => m.unit === value?.unit);
+  units = isBoolean(units) ? defaultUnits : units;
+  const findUnit = units?.find(m => m.unit === value?.unit);
   const max = findUnit?.max || '';
   const min = findUnit?.min || '';
   const firstValue = Object.values(value).find(v => v != '' && v != 'auto');
@@ -165,7 +167,7 @@ const Spacing = ({ onChange, value, units, ...ControlContainer }) => {
     onChange({ ...value, ...dimensionsValues(firstValue, value) });
   };
 
-  units = (units || defaultUnits).map(u => u.unit);
+  units = units?.map(u => u.unit);
 
   return (
     <SpacingGroupStyles className="cw__spacing-group">
@@ -189,7 +191,7 @@ const Spacing = ({ onChange, value, units, ...ControlContainer }) => {
         >
           {Icons.link}
         </button>
-        {(units || value?.unit) && (
+        {(value?.unit) && (
           <UnitPicker
             units={units}
             value={value.unit}

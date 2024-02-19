@@ -347,6 +347,7 @@ const Select = ({
             onSearch={handleOnSearch}
           />
         }
+        animation="shift-away"
         trigger="click"
         arrow={false}
         interactive

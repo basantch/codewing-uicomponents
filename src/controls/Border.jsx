@@ -18,7 +18,7 @@ const PopoverContent = ({
   return (
     <>
       <InputNumber
-        label="Border Widget"
+        label="Border Width"
         direction="horizontal"
         value={width}
         onChange={(_width) => onChange({ ...value, width: _width })}

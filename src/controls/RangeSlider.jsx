@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import { RangeControl } from "@wordpress/components";
 import ControlContainer from "../containers/ControlContainer";
 import { UnitPicker } from "../components";
+import { isBoolean } from "lodash";
 
 const RangeStyles = styled.div`
   display: flex;
@@ -15,6 +16,7 @@ const RangeStyles = styled.div`
         background-color: var(--cw__background-color);
         padding-left: 5px;
         padding-right: 5px;
+        text-align: center;
       }
     }
   }
@@ -25,7 +27,6 @@ const RangeStyles = styled.div`
     .components-input-control__input {
       border-top-right-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
-      text-align: center;
       -moz-appearance: textfield;
       &::-webkit-outer-spin-button,
       &::-webkit-inner-spin-button {
@@ -53,19 +54,52 @@ const RangeStyles = styled.div`
   }
 `;
 
+const defaultUnits = [
+  {
+    unit: 'px',
+    min: 0,
+    max: 1000
+  },
+  {
+    unit: 'em',
+    min: 0,
+    max: 20
+  },
+  {
+    unit: 'rem',
+    min: 0,
+    max: 20
+  },
+  {
+    unit: '%',
+    min: 0,
+    max: 100
+  },
+  {
+    unit: 'pt',
+    min: 0,
+    max: 100
+  },
+]
+
 const RangeSlider = ({ units, value, onChange, className, ...ControlContainer }) => {
   const { value: _value, unit } = value;
+  units = isBoolean(units) ? defaultUnits : units;
+  const min = units?.find(u => u.unit == unit)?.min;
+  const max = units?.find(u => u.unit == unit)?.max;
+
+  units = units?.map(u => u?.unit);
   return (
-    <RangeStyles className={units || unit ? "cw__has-unit" : ""}>
+    <RangeStyles className={unit ? "cw__has-unit" : ""}>
       <RangeControl
         value={+_value}
         onChange={(val) => onChange({ ...value, value: val })}
-        min={units?.find(u => u.unit == unit)?.min || 0}
-        max={units?.find(u => u.unit == unit)?.max || 100}
+        min={min}
+        max={max}
       />
-      {(units || unit) && (
+      {(unit) && (
         <UnitPicker
-          units={units?.map(u => u.unit)}
+          units={units}
           value={unit}
           onChange={(u) => onChange({ ...value, unit: u })}
         />
